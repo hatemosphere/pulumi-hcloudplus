@@ -9,7 +9,7 @@ go 1.26
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20260318212141-5525259d096b
 
 require (
-	github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20260411201412-4aa16b6532d5
+	github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20260411201747-3e67cca6ac77
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.126.0
 )
 
@@ -108,8 +108,8 @@ require (
 	github.com/hashicorp/terraform-registry-address v0.4.0 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect
-	github.com/hatemosphere/hcloud-go-plus v0.0.0-20260411201341-4aada695568a // indirect
-	github.com/hatemosphere/hcloud-go-plus/authbrowser v0.0.0-20260411201341-4aada695568a // indirect
+	github.com/hatemosphere/hcloud-go-plus v0.0.0-20260411201718-ce7305f2cab4 // indirect
+	github.com/hatemosphere/hcloud-go-plus/authbrowser v0.0.0-20260411201718-ce7305f2cab4 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect
