@@ -24,9 +24,6 @@ which in turn is built on
 
 ## Installing
 
-This provider is not yet published to the Pulumi Registry. Until it is,
-the fastest way to consume it is via the GitHub npm registry:
-
 ### Node.js (TypeScript / JavaScript)
 
 ```sh
@@ -37,15 +34,29 @@ echo "@hatemosphere:registry=https://npm.pkg.github.com" >> ~/.npmrc
 npm install @hatemosphere/pulumi-hcloudplus
 ```
 
-You also need the provider plugin binary itself on your machine. The
-cleanest way is to `go install` the runtime at a pinned version:
+The provider plugin binary downloads itself automatically on first
+`pulumi up`. The generated schema carries a `pluginDownloadURL` pointing
+at this repo's GitHub Releases, so Pulumi resolves the right OS+arch
+tarball, extracts it to `~/.pulumi/plugins/`, and runs it. No manual
+install step required.
+
+If you prefer to pre-install (air-gapped CI, explicit version pinning
+in images):
 
 ```sh
-go install github.com/hatemosphere/pulumi-hcloudplus/provider/cmd/pulumi-resource-hcloudplus@latest
+pulumi plugin install resource hcloudplus v0.0.2 \
+  --server github://api.github.com/hatemosphere/pulumi-hcloudplus
 ```
 
-(Or download a release tarball from GitHub Releases once tagged; Pulumi's
-`pluginDownloadURL` points at the GH releases of this repo.)
+### Local development (no publish)
+
+If you're hacking on the provider itself and want to run it without
+tagging a release, build + drop the binary into `$GOPATH/bin` — Pulumi
+auto-discovers `pulumi-resource-*` binaries on `PATH`:
+
+```sh
+make install
+```
 
 ## Quick start
 
