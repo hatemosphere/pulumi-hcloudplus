@@ -14,8 +14,10 @@ const project = new hcgp.Project("example", {
     name: "pulumi-hcloudplus-demo",
 });
 
+// project.id is always string in Pulumi (Terraform resource ID convention),
+// but our schema declares project_id as int64. Convert explicitly.
 const token = new hcgp.ProjectToken("pulumi-rw", {
-    projectId: project.id,
+    projectId: project.id.apply((id) => parseInt(id, 10)),
     description: "pulumi-managed",
     readonly: false,
 });

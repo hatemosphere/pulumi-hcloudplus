@@ -74,6 +74,18 @@ build_nodejs: schema
 	rm -rf sdk/nodejs
 	mv sdk-tmp/nodejs sdk/nodejs
 	rm -rf sdk-tmp
+	# Compile TS -> JS and assemble a publishable package root at bin/.
+	# Pulumi's generated nodejs SDK expects package.json / README / LICENSE
+	# to sit next to the compiled JS at runtime (utilities.js requires
+	# './package.json' to resolve the version).
+	cd sdk/nodejs && \
+		npm install --no-audit --no-fund --silent && \
+		npm run build && \
+		cp package.json ./bin/ && \
+		cp -f ../../README.md ./bin/ 2>/dev/null || true && \
+		cp -f ../../LICENSE ./bin/ 2>/dev/null || true && \
+		sed -i.bak "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json && \
+		rm ./bin/package.json.bak
 
 build_python: schema
 	pulumi package gen-sdk $(SCHEMA_PATH) --language python --out sdk-tmp

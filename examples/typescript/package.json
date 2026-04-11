@@ -1,9 +1,9 @@
 {
-  "name": "pulumi-hcloudplus-example",
+  "name": "pulumi-hcloudplus-smoke",
   "private": true,
   "main": "index.ts",
   "dependencies": {
-    "@hatemosphere/pulumi-hcloudplus": "^0.0.1",
+    "@hatemosphere/pulumi-hcloudplus": "file:../../sdk/nodejs/bin",
     "@pulumi/hcloud": "^1.22.0",
     "@pulumi/pulumi": "^3.100.0"
   },
