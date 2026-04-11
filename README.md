@@ -83,8 +83,8 @@ const prov = new hcloud.Provider("infra-prod", { token: pulumiTok.secret });
 
 const server = new hcloud.Server("web", {
     name: "web-01",
-    serverType: "cx22",
-    image: "debian-12",
+    serverType: "cx23",
+    image: "debian-13",
     location: "nbg1",
 }, { provider: prov });
 
