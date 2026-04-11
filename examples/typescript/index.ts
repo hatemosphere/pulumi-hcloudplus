@@ -32,7 +32,7 @@ const server = new hcloud.Server(
     "web",
     {
         name: "web-01",
-        serverType: "cx22",
+        serverType: "cx23",
         image: "debian-12",
         location: "nbg1",
     },
