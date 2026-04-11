@@ -1,0 +1,714 @@
+{
+    "name": "hcloudplus",
+    "displayName": "hcloudplus",
+    "description": "A Pulumi provider for Hetzner Cloud's undocumented console API. Manages projects, mints project API tokens, invites members, and reads cross-project audit logs — everything the official hcloud Pulumi/Terraform provider can't reach. Built on terraform-provider-hcloudplus.",
+    "keywords": [
+        "pulumi",
+        "hcloud",
+        "hetzner",
+        "hetzner-cloud",
+        "category/cloud",
+        "kind/native"
+    ],
+    "homepage": "https://github.com/hatemosphere/pulumi-hcloudplus",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`hcloudplus` Terraform Provider](https://github.com/hatemosphere/terraform-provider-hcloudplus).",
+    "repository": "https://github.com/hatemosphere/pulumi-hcloudplus",
+    "pluginDownloadURL": "github://api.github.com/hatemosphere/pulumi-hcloudplus",
+    "publisher": "hatemosphere",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20",
+            "rootNamespace": "Hatemosphere",
+            "respectSchemaVersion": true
+        },
+        "go": {
+            "importBasePath": "github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true,
+            "respectSchemaVersion": true
+        },
+        "nodejs": {
+            "packageName": "@hatemosphere/pulumi-hcloudplus",
+            "packageDescription": "A Pulumi provider for Hetzner Cloud's undocumented console API. Manages projects, mints project API tokens, invites members, and reads cross-project audit logs — everything the official hcloud Pulumi/Terraform provider can't reach. Built on terraform-provider-hcloudplus.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/hatemosphere/terraform-provider-hcloudplus)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-hcloudplus` repo](https://github.com/hatemosphere/pulumi-hcloudplus/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-hcloudplus` repo](https://github.com/hatemosphere/terraform-provider-hcloudplus/issues).",
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
+        },
+        "python": {
+            "packageName": "hatemosphere_pulumi_hcloudplus",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/hatemosphere/terraform-provider-hcloudplus)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-hcloudplus` repo](https://github.com/hatemosphere/pulumi-hcloudplus/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-hcloudplus` repo](https://github.com/hatemosphere/terraform-provider-hcloudplus/issues).",
+            "compatibility": "tfbridge20",
+            "respectSchemaVersion": true,
+            "pyproject": {
+                "enabled": true
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "endpoint": {
+                "type": "string",
+                "description": "Override the API base URL. Defaults to https://api.hetzner.cloud/v1. Useful for recording/replay or tests."
+            },
+            "password": {
+                "type": "string",
+                "description": "Hetzner Cloud Console password. Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_PASSWORD.",
+                "secret": true
+            },
+            "totpCmd": {
+                "type": "string",
+                "description": "Shell command whose stdout (trimmed) is the current 6-digit TOTP code. Example: \"op read 'op://vault/accounts.hetzner.com/one-time password?attribute=totp'\". Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_TOTP_CMD.",
+                "secret": true
+            },
+            "userToken": {
+                "type": "string",
+                "description": "Account-level user token extracted from a logged-in Hetzner Cloud Console session. Mutually exclusive with username/password/totp_cmd. Can also be set via the HCLOUDPLUS_USER_TOKEN environment variable.",
+                "secret": true
+            },
+            "username": {
+                "type": "string",
+                "description": "Hetzner Cloud Console username (robot login / client number or account email). Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_USERNAME."
+            }
+        }
+    },
+    "types": {
+        "hcloudplus:index/ProjectOwner:ProjectOwner": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Primary email address on the owning Hetzner account.\n"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "Numeric Hetzner account ID of the project owner.\n"
+                },
+                "robotCn": {
+                    "type": "string",
+                    "description": "Hetzner Robot client number (e.g. K0247406420) of the owning account.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "email",
+                        "id",
+                        "robotCn"
+                    ]
+                }
+            }
+        },
+        "hcloudplus:index/getActivitiesActivity:getActivitiesActivity": {
+            "properties": {
+                "activityType": {
+                    "type": "string"
+                },
+                "apiTokenPrefix": {
+                    "type": "string"
+                },
+                "created": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "projectId": {
+                    "type": "integer"
+                },
+                "projectName": {
+                    "type": "string"
+                },
+                "sourceIp": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "userRobotCn": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "activityType",
+                "apiTokenPrefix",
+                "created",
+                "id",
+                "projectId",
+                "projectName",
+                "sourceIp",
+                "status",
+                "userRobotCn"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "hcloudplus:index/getLimitsLimits:getLimitsLimits": {
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "usage": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "limit",
+                "usage"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "hcloudplus:index/getProjectsProject:getProjectsProject": {
+            "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "created",
+                "id",
+                "name",
+                "role"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the hcloudplus package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "endpoint": {
+                "type": "string",
+                "description": "Override the API base URL. Defaults to https://api.hetzner.cloud/v1. Useful for recording/replay or tests."
+            },
+            "password": {
+                "type": "string",
+                "description": "Hetzner Cloud Console password. Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_PASSWORD.",
+                "secret": true
+            },
+            "totpCmd": {
+                "type": "string",
+                "description": "Shell command whose stdout (trimmed) is the current 6-digit TOTP code. Example: \"op read 'op://vault/accounts.hetzner.com/one-time password?attribute=totp'\". Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_TOTP_CMD.",
+                "secret": true
+            },
+            "userToken": {
+                "type": "string",
+                "description": "Account-level user token extracted from a logged-in Hetzner Cloud Console session. Mutually exclusive with username/password/totp_cmd. Can also be set via the HCLOUDPLUS_USER_TOKEN environment variable.",
+                "secret": true
+            },
+            "username": {
+                "type": "string",
+                "description": "Hetzner Cloud Console username (robot login / client number or account email). Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_USERNAME."
+            }
+        },
+        "inputProperties": {
+            "endpoint": {
+                "type": "string",
+                "description": "Override the API base URL. Defaults to https://api.hetzner.cloud/v1. Useful for recording/replay or tests."
+            },
+            "password": {
+                "type": "string",
+                "description": "Hetzner Cloud Console password. Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_PASSWORD.",
+                "secret": true
+            },
+            "totpCmd": {
+                "type": "string",
+                "description": "Shell command whose stdout (trimmed) is the current 6-digit TOTP code. Example: \"op read 'op://vault/accounts.hetzner.com/one-time password?attribute=totp'\". Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_TOTP_CMD.",
+                "secret": true
+            },
+            "userToken": {
+                "type": "string",
+                "description": "Account-level user token extracted from a logged-in Hetzner Cloud Console session. Mutually exclusive with username/password/totp_cmd. Can also be set via the HCLOUDPLUS_USER_TOKEN environment variable.",
+                "secret": true
+            },
+            "username": {
+                "type": "string",
+                "description": "Hetzner Cloud Console username (robot login / client number or account email). Required when\u003cspan pulumi-lang-nodejs=\" userToken \" pulumi-lang-dotnet=\" UserToken \" pulumi-lang-go=\" userToken \" pulumi-lang-python=\" user_token \" pulumi-lang-yaml=\" userToken \" pulumi-lang-java=\" userToken \"\u003e userToken \u003c/span\u003eis not set. Can also be set via HCLOUDPLUS_USERNAME."
+            }
+        },
+        "methods": {
+            "terraformConfig": "pulumi:providers:hcloudplus/terraformConfig"
+        }
+    },
+    "resources": {
+        "hcloudplus:index/project:Project": {
+            "description": "A Hetzner Cloud project. Managed via the account-level private API.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\n\nconst example = new hcloudplus.Project(\"example\", {name: \"infra-prod\"});\n```\n```python\nimport pulumi\nimport hatemosphere_pulumi_hcloudplus as hcloudplus\n\nexample = hcloudplus.Project(\"example\", name=\"infra-prod\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Hcloudplus.Index.Project(\"example\", new()\n    {\n        Name = \"infra-prod\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := hcloudplus.NewProject(ctx, \"example\", \u0026hcloudplus.ProjectArgs{\n\t\t\tName: pulumi.String(\"infra-prod\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.hcloudplus.Project;\nimport com.pulumi.hcloudplus.ProjectArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Project(\"example\", ProjectArgs.builder()\n            .name(\"infra-prod\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: hcloudplus:Project\n    properties:\n      name: infra-prod\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nThe `pulumi import` command can be used, for example:\n\nImport an existing project by its numeric ID.\n\n```sh\n$ pulumi import hcloudplus:index/project:Project example 14138093\n```\n\n",
+            "properties": {
+                "created": {
+                    "type": "string",
+                    "description": "RFC 3339 timestamp of project creation.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Human-readable project name. Can be changed in place.\n"
+                },
+                "owner": {
+                    "$ref": "#/types/hcloudplus:index/ProjectOwner:ProjectOwner",
+                    "description": "The account that owns the project.\n"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Caller's role in the project (typically 'owner' for projects created via this provider).\n"
+                }
+            },
+            "required": [
+                "created",
+                "name",
+                "owner",
+                "role"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Human-readable project name. Can be changed in place.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Project resources.\n",
+                "properties": {
+                    "created": {
+                        "type": "string",
+                        "description": "RFC 3339 timestamp of project creation.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Human-readable project name. Can be changed in place.\n"
+                    },
+                    "owner": {
+                        "$ref": "#/types/hcloudplus:index/ProjectOwner:ProjectOwner",
+                        "description": "The account that owns the project.\n"
+                    },
+                    "role": {
+                        "type": "string",
+                        "description": "Caller's role in the project (typically 'owner' for projects created via this provider).\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "hcloudplus:index/projectInvitation:ProjectInvitation": {
+            "description": "A pending project membership invitation. Invitations are immutable: changing email or role forces replacement (Hetzner does not expose an update endpoint). Accepted invitations continue to exist as project members, which this resource does not manage.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\n\nconst example = new hcloudplus.Project(\"example\", {name: \"infra-prod\"});\nconst teammate = new hcloudplus.ProjectInvitation(\"teammate\", {\n    projectId: example.id,\n    email: \"alice@example.com\",\n    role: \"admin\",\n    reinviteOnExpiry: true,\n});\n```\n```python\nimport pulumi\nimport hatemosphere_pulumi_hcloudplus as hcloudplus\n\nexample = hcloudplus.Project(\"example\", name=\"infra-prod\")\nteammate = hcloudplus.ProjectInvitation(\"teammate\",\n    project_id=example.id,\n    email=\"alice@example.com\",\n    role=\"admin\",\n    reinvite_on_expiry=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Hcloudplus.Index.Project(\"example\", new()\n    {\n        Name = \"infra-prod\",\n    });\n\n    var teammate = new Hcloudplus.Index.ProjectInvitation(\"teammate\", new()\n    {\n        ProjectId = example.Id,\n        Email = \"alice@example.com\",\n        Role = \"admin\",\n        ReinviteOnExpiry = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := hcloudplus.NewProject(ctx, \"example\", \u0026hcloudplus.ProjectArgs{\n\t\t\tName: pulumi.String(\"infra-prod\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = hcloudplus.NewProjectInvitation(ctx, \"teammate\", \u0026hcloudplus.ProjectInvitationArgs{\n\t\t\tProjectId:        example.ID(),\n\t\t\tEmail:            pulumi.String(\"alice@example.com\"),\n\t\t\tRole:             pulumi.String(\"admin\"),\n\t\t\tReinviteOnExpiry: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.hcloudplus.Project;\nimport com.pulumi.hcloudplus.ProjectArgs;\nimport com.pulumi.hcloudplus.ProjectInvitation;\nimport com.pulumi.hcloudplus.ProjectInvitationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Project(\"example\", ProjectArgs.builder()\n            .name(\"infra-prod\")\n            .build());\n\n        var teammate = new ProjectInvitation(\"teammate\", ProjectInvitationArgs.builder()\n            .projectId(example.id())\n            .email(\"alice@example.com\")\n            .role(\"admin\")\n            .reinviteOnExpiry(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: hcloudplus:Project\n    properties:\n      name: infra-prod\n  teammate:\n    type: hcloudplus:ProjectInvitation\n    properties:\n      projectId: ${example.id}\n      email: alice@example.com\n      role: admin\n      reinviteOnExpiry: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nThe `pulumi import` command can be used, for example:\n\nImport format: \u003cproject_id\u003e:\u003cinvitation_id\u003e\n\n```sh\n$ pulumi import hcloudplus:index/projectInvitation:ProjectInvitation teammate 14138093:1111279\n```\n\n",
+            "properties": {
+                "accepted": {
+                    "type": "string",
+                    "description": "RFC 3339 timestamp when the invitation was accepted, or empty if still pending.\n"
+                },
+                "created": {
+                    "type": "string",
+                    "description": "RFC 3339 timestamp when the invitation was sent.\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.\n"
+                },
+                "expired": {
+                    "type": "string",
+                    "description": "RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the \u003cspan pulumi-lang-nodejs=\"`reinviteOnExpiry`\" pulumi-lang-dotnet=\"`ReinviteOnExpiry`\" pulumi-lang-go=\"`reinviteOnExpiry`\" pulumi-lang-python=\"`reinvite_on_expiry`\" pulumi-lang-yaml=\"`reinviteOnExpiry`\" pulumi-lang-java=\"`reinviteOnExpiry`\"\u003e`reinviteOnExpiry`\u003c/span\u003e attribute to mint a fresh invitation.\n"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "description": "ID of the project to invite the user into.\n"
+                },
+                "reinviteOnExpiry": {
+                    "type": "boolean",
+                    "description": "If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.\n"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Role to grant on acceptance. One of: admin, member, restricted.\n"
+                }
+            },
+            "required": [
+                "accepted",
+                "created",
+                "email",
+                "expired",
+                "projectId",
+                "role"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.\n"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "description": "ID of the project to invite the user into.\n"
+                },
+                "reinviteOnExpiry": {
+                    "type": "boolean",
+                    "description": "If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.\n"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Role to grant on acceptance. One of: admin, member, restricted.\n"
+                }
+            },
+            "requiredInputs": [
+                "email",
+                "projectId",
+                "role"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ProjectInvitation resources.\n",
+                "properties": {
+                    "accepted": {
+                        "type": "string",
+                        "description": "RFC 3339 timestamp when the invitation was accepted, or empty if still pending.\n"
+                    },
+                    "created": {
+                        "type": "string",
+                        "description": "RFC 3339 timestamp when the invitation was sent.\n"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.\n"
+                    },
+                    "expired": {
+                        "type": "string",
+                        "description": "RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the \u003cspan pulumi-lang-nodejs=\"`reinviteOnExpiry`\" pulumi-lang-dotnet=\"`ReinviteOnExpiry`\" pulumi-lang-go=\"`reinviteOnExpiry`\" pulumi-lang-python=\"`reinvite_on_expiry`\" pulumi-lang-yaml=\"`reinviteOnExpiry`\" pulumi-lang-java=\"`reinviteOnExpiry`\"\u003e`reinviteOnExpiry`\u003c/span\u003e attribute to mint a fresh invitation.\n"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project to invite the user into.\n"
+                    },
+                    "reinviteOnExpiry": {
+                        "type": "boolean",
+                        "description": "If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.\n"
+                    },
+                    "role": {
+                        "type": "string",
+                        "description": "Role to grant on acceptance. One of: admin, member, restricted.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "hcloudplus:index/projectToken:ProjectToken": {
+            "description": "A project-scoped API token for use against the public Hetzner Cloud API. The \u003cspan pulumi-lang-nodejs=\"`secret`\" pulumi-lang-dotnet=\"`Secret`\" pulumi-lang-go=\"`secret`\" pulumi-lang-python=\"`secret`\" pulumi-lang-yaml=\"`secret`\" pulumi-lang-java=\"`secret`\"\u003e`secret`\u003c/span\u003e output is returned once at creation time; store it in Pulumi/Terraform state (encrypted) and pass it to hcloud-go / terraform-provider-hcloud as needed. Tokens are immutable: any change to \u003cspan pulumi-lang-nodejs=\"`description`\" pulumi-lang-dotnet=\"`Description`\" pulumi-lang-go=\"`description`\" pulumi-lang-python=\"`description`\" pulumi-lang-yaml=\"`description`\" pulumi-lang-java=\"`description`\"\u003e`description`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`readonly`\" pulumi-lang-dotnet=\"`Readonly`\" pulumi-lang-go=\"`readonly`\" pulumi-lang-python=\"`readonly`\" pulumi-lang-yaml=\"`readonly`\" pulumi-lang-java=\"`readonly`\"\u003e`readonly`\u003c/span\u003e forces replacement.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\n\nconst example = new hcloudplus.Project(\"example\", {name: \"infra-prod\"});\n// Read-write token for use with the upstream hcloud provider.\nconst rw = new hcloudplus.ProjectToken(\"rw\", {\n    projectId: example.id,\n    description: \"pulumi-rw\",\n    readonly: false,\n});\n```\n```python\nimport pulumi\nimport hatemosphere_pulumi_hcloudplus as hcloudplus\n\nexample = hcloudplus.Project(\"example\", name=\"infra-prod\")\n# Read-write token for use with the upstream hcloud provider.\nrw = hcloudplus.ProjectToken(\"rw\",\n    project_id=example.id,\n    description=\"pulumi-rw\",\n    readonly=False)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Hcloudplus.Index.Project(\"example\", new()\n    {\n        Name = \"infra-prod\",\n    });\n\n    // Read-write token for use with the upstream hcloud provider.\n    var rw = new Hcloudplus.Index.ProjectToken(\"rw\", new()\n    {\n        ProjectId = example.Id,\n        Description = \"pulumi-rw\",\n        Readonly = false,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := hcloudplus.NewProject(ctx, \"example\", \u0026hcloudplus.ProjectArgs{\n\t\t\tName: pulumi.String(\"infra-prod\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t// Read-write token for use with the upstream hcloud provider.\n\t\t_, err = hcloudplus.NewProjectToken(ctx, \"rw\", \u0026hcloudplus.ProjectTokenArgs{\n\t\t\tProjectId:   example.ID(),\n\t\t\tDescription: pulumi.String(\"pulumi-rw\"),\n\t\t\tReadonly:    pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.hcloudplus.Project;\nimport com.pulumi.hcloudplus.ProjectArgs;\nimport com.pulumi.hcloudplus.ProjectToken;\nimport com.pulumi.hcloudplus.ProjectTokenArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Project(\"example\", ProjectArgs.builder()\n            .name(\"infra-prod\")\n            .build());\n\n        // Read-write token for use with the upstream hcloud provider.\n        var rw = new ProjectToken(\"rw\", ProjectTokenArgs.builder()\n            .projectId(example.id())\n            .description(\"pulumi-rw\")\n            .readonly(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: hcloudplus:Project\n    properties:\n      name: infra-prod\n  # Read-write token for use with the upstream hcloud provider.\n  rw:\n    type: hcloudplus:ProjectToken\n    properties:\n      projectId: ${example.id}\n      description: pulumi-rw\n      readonly: false\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nThe `pulumi import` command can be used, for example:\n\nImport format: \u003cproject_id\u003e:\u003ctoken_id\u003e\nNote: the \u003cspan pulumi-lang-nodejs=\"`secret`\" pulumi-lang-dotnet=\"`Secret`\" pulumi-lang-go=\"`secret`\" pulumi-lang-python=\"`secret`\" pulumi-lang-yaml=\"`secret`\" pulumi-lang-java=\"`secret`\"\u003e`secret`\u003c/span\u003e attribute is UNKNOWN after import — Hetzner does not\nreturn it on subsequent reads. Any downstream provider that consumes the\nsecret will need a fresh token created via terraform.\n\n```sh\n$ pulumi import hcloudplus:index/projectToken:ProjectToken rw 14138093:177763691\n```\n\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Human-readable description of the token (shown in the Hetzner console).\n"
+                },
+                "prefix": {
+                    "type": "string",
+                    "description": "First-half prefix of the token, used to identify it in audit logs.\n"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "description": "ID of the project this token belongs to.\n"
+                },
+                "readonly": {
+                    "type": "boolean",
+                    "description": "Whether the token has read-only scope. Defaults to false (read-write).\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.\n",
+                    "secret": true
+                }
+            },
+            "required": [
+                "description",
+                "prefix",
+                "projectId",
+                "readonly",
+                "secret"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Human-readable description of the token (shown in the Hetzner console).\n"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "description": "ID of the project this token belongs to.\n"
+                },
+                "readonly": {
+                    "type": "boolean",
+                    "description": "Whether the token has read-only scope. Defaults to false (read-write).\n"
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "projectId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ProjectToken resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Human-readable description of the token (shown in the Hetzner console).\n"
+                    },
+                    "prefix": {
+                        "type": "string",
+                        "description": "First-half prefix of the token, used to identify it in audit logs.\n"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project this token belongs to.\n"
+                    },
+                    "readonly": {
+                        "type": "boolean",
+                        "description": "Whether the token has read-only scope. Defaults to false (read-write).\n"
+                    },
+                    "secret": {
+                        "type": "string",
+                        "description": "The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.\n",
+                        "secret": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "hcloudplus:index/getActivities:getActivities": {
+            "description": "Cross-project audit activities. Reads GET /_activities. Time window is capped at 31 days by Hetzner.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\nimport * as std from \"@pulumi/std\";\n\nconst recentTokenOps = std.timestamp({}).then(invoke =\u003e std.timeadd({\n    duration: invoke.result,\n    timestamp: \"-24h\",\n})).then(invoke =\u003e hcloudplus.getActivities({\n    includeUserActivities: false,\n    types: [\n        \"token.create\",\n        \"token.delete\",\n    ],\n    createdAfter: invoke.result,\n}));\nexport const recentTokenEvents = recentTokenOps.then(recentTokenOps =\u003e recentTokenOps.activities);\n```\n```python\nimport pulumi\nimport pulumi_hcloudplus as hcloudplus\nimport pulumi_std as std\n\nrecent_token_ops = hcloudplus.get_activities(include_user_activities=False,\n    types=[\n        \"token.create\",\n        \"token.delete\",\n    ],\n    created_after=std.timeadd(duration=std.timestamp().result,\n        timestamp=\"-24h\").result)\npulumi.export(\"recentTokenEvents\", recent_token_ops.activities)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\nusing Std = Pulumi.Std;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var recentTokenOps = Hcloudplus.Index.GetActivities.Invoke(new()\n    {\n        IncludeUserActivities = false,\n        Types = new[]\n        {\n            \"token.create\",\n            \"token.delete\",\n        },\n        CreatedAfter = Std.Index.Timeadd.Invoke(new()\n        {\n            Duration = Std.Index.Timestamp.Invoke().Result,\n            Timestamp = \"-24h\",\n        }).Result,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"recentTokenEvents\"] = recentTokenOps.Apply(getActivitiesResult =\u003e getActivitiesResult.Activities),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi-std/sdk/v2/go/std\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\trecentTokenOps, err := hcloudplus.GetActivities(ctx, \u0026hcloudplus.GetActivitiesArgs{\n\t\t\tIncludeUserActivities: pulumi.BoolRef(false),\n\t\t\tTypes: []string{\n\t\t\t\t\"token.create\",\n\t\t\t\t\"token.delete\",\n\t\t\t},\n\t\t\tCreatedAfter: pulumi.StringRef(std.Timeadd(ctx, \u0026std.TimeaddArgs{\n\t\t\t\tDuration:  std.Timestamp(ctx, \u0026std.TimestampArgs{}, nil).Result,\n\t\t\t\tTimestamp: \"-24h\",\n\t\t\t}, nil).Result),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"recentTokenEvents\", recentTokenOps.Activities)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.std.StdFunctions;\nimport com.pulumi.std.inputs.TimestampArgs;\nimport com.pulumi.std.inputs.TimeaddArgs;\nimport com.pulumi.hcloudplus.HcloudplusFunctions;\nimport com.pulumi.hcloudplus.inputs.GetActivitiesArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var recentTokenOps = HcloudplusFunctions.getActivities(GetActivitiesArgs.builder()\n            .includeUserActivities(false)\n            .types(            \n                \"token.create\",\n                \"token.delete\")\n            .createdAfter(StdFunctions.timeadd(TimeaddArgs.builder()\n                .duration(StdFunctions.timestamp(TimestampArgs.builder()\n                    .build()).result())\n                .timestamp(\"-24h\")\n                .build()).result())\n            .build());\n\n        ctx.export(\"recentTokenEvents\", recentTokenOps.activities());\n    }\n}\n```\n```yaml\nvariables:\n  recentTokenOps:\n    fn::invoke:\n      function: hcloudplus:getActivities\n      arguments:\n        includeUserActivities: false\n        types:\n          - token.create\n          - token.delete\n        createdAfter:\n          fn::invoke:\n            function: std:timeadd\n            arguments:\n              duration:\n                fn::invoke:\n                  function: std:timestamp\n                  arguments: {}\n                  return: result\n              timestamp: -24h\n            return: result\noutputs:\n  recentTokenEvents: ${recentTokenOps.activities}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getActivities.\n",
+                "properties": {
+                    "createdAfter": {
+                        "type": "string",
+                        "description": "RFC 3339 lower time bound.\n"
+                    },
+                    "createdBefore": {
+                        "type": "string",
+                        "description": "RFC 3339 upper time bound. Window capped at 31 days.\n"
+                    },
+                    "includeUserActivities": {
+                        "type": "boolean",
+                        "description": "Include account-level events (logins, etc). At least one of include*user*activities or\u003cspan pulumi-lang-nodejs=\" projectIds \" pulumi-lang-dotnet=\" ProjectIds \" pulumi-lang-go=\" projectIds \" pulumi-lang-python=\" project_ids \" pulumi-lang-yaml=\" projectIds \" pulumi-lang-java=\" projectIds \"\u003e projectIds \u003c/span\u003eis required.\n"
+                    },
+                    "perPage": {
+                        "type": "integer",
+                        "description": "Page size (default 25, max 500).\n"
+                    },
+                    "projectIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "Filter to specific project IDs.\n"
+                    },
+                    "types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Filter by activity type (e.g. 'server.create', 'token.create').\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getActivities.\n",
+                "properties": {
+                    "activities": {
+                        "items": {
+                            "$ref": "#/types/hcloudplus:index/getActivitiesActivity:getActivitiesActivity"
+                        },
+                        "type": "array"
+                    },
+                    "createdAfter": {
+                        "description": "RFC 3339 lower time bound.\n",
+                        "type": "string"
+                    },
+                    "createdBefore": {
+                        "description": "RFC 3339 upper time bound. Window capped at 31 days.\n",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "includeUserActivities": {
+                        "description": "Include account-level events (logins, etc). At least one of include*user*activities or\u003cspan pulumi-lang-nodejs=\" projectIds \" pulumi-lang-dotnet=\" ProjectIds \" pulumi-lang-go=\" projectIds \" pulumi-lang-python=\" project_ids \" pulumi-lang-yaml=\" projectIds \" pulumi-lang-java=\" projectIds \"\u003e projectIds \u003c/span\u003eis required.\n",
+                        "type": "boolean"
+                    },
+                    "perPage": {
+                        "description": "Page size (default 25, max 500).\n",
+                        "type": "integer"
+                    },
+                    "projectIds": {
+                        "description": "Filter to specific project IDs.\n",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "types": {
+                        "description": "Filter by activity type (e.g. 'server.create', 'token.create').\n",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "activities",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "hcloudplus:index/getLimits:getLimits": {
+            "description": "Account-wide resource limits and usage. Reads GET /_user/limits. Useful for building capacity dashboards or Prometheus exporters.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\n\nconst account = hcloudplus.getLimits({});\nexport const serverQuota = account.then(account =\u003e account.limits?.server);\nexport const primaryIpQuota = account.then(account =\u003e account.limits?.primary_ip);\n```\n```python\nimport pulumi\nimport pulumi_hcloudplus as hcloudplus\n\naccount = hcloudplus.get_limits()\npulumi.export(\"serverQuota\", account.limits[\"server\"])\npulumi.export(\"primaryIpQuota\", account.limits[\"primary_ip\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var account = Hcloudplus.Index.GetLimits.Invoke();\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"serverQuota\"] = account.Apply(getLimitsResult =\u003e getLimitsResult.Limits?.Server),\n        [\"primaryIpQuota\"] = account.Apply(getLimitsResult =\u003e getLimitsResult.Limits?.Primary_ip),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\taccount, err := hcloudplus.GetLimits(ctx, map[string]interface{}{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"serverQuota\", account.Limits.Server)\n\t\tctx.Export(\"primaryIpQuota\", account.Limits.Primary_ip)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.hcloudplus.HcloudplusFunctions;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var account = HcloudplusFunctions.getLimits(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference);\n\n        ctx.export(\"serverQuota\", account.limits().server());\n        ctx.export(\"primaryIpQuota\", account.limits().primary_ip());\n    }\n}\n```\n```yaml\nvariables:\n  account:\n    fn::invoke:\n      function: hcloudplus:getLimits\n      arguments: {}\noutputs:\n  # Example: expose current usage + quota as outputs for a dashboard.\n  serverQuota: ${account.limits.server}\n  primaryIpQuota: ${account.limits.primary_ip}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "outputs": {
+                "description": "A collection of values returned by getLimits.\n",
+                "properties": {
+                    "extendedSupport": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "limits": {
+                        "additionalProperties": {
+                            "$ref": "#/types/hcloudplus:index/getLimitsLimits:getLimitsLimits"
+                        },
+                        "description": "Map of resource name (e.g. 'server', 'bucket') to {limit, usage}.\n",
+                        "type": "object"
+                    },
+                    "requestAllowed": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "extendedSupport",
+                    "limits",
+                    "requestAllowed",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "hcloudplus:index/getProjects:getProjects": {
+            "description": "All projects the authenticated user has access to. Reads GET /_projects, walking every page.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\n\nconst all = hcloudplus.getProjects({});\nexport const allProjects = all.then(all =\u003e all.projects);\nexport const firstProjectName = all.then(all =\u003e all.projects?.[0]?.name);\n```\n```python\nimport pulumi\nimport pulumi_hcloudplus as hcloudplus\n\nall = hcloudplus.get_projects()\npulumi.export(\"allProjects\", all.projects)\npulumi.export(\"firstProjectName\", all.projects[0].name)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var all = Hcloudplus.Index.GetProjects.Invoke();\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"allProjects\"] = all.Apply(getProjectsResult =\u003e getProjectsResult.Projects),\n        [\"firstProjectName\"] = all.Apply(getProjectsResult =\u003e getProjectsResult.Projects[0]?.Name),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tall, err := hcloudplus.GetProjects(ctx, map[string]interface{}{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"allProjects\", all.Projects)\n\t\tctx.Export(\"firstProjectName\", all.Projects[0].Name)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.hcloudplus.HcloudplusFunctions;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var all = HcloudplusFunctions.getProjects(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference);\n\n        ctx.export(\"allProjects\", all.projects());\n        ctx.export(\"firstProjectName\", all.projects()[0].name());\n    }\n}\n```\n```yaml\nvariables:\n  all:\n    fn::invoke:\n      function: hcloudplus:getProjects\n      arguments: {}\noutputs:\n  allProjects: ${all.projects}\n  firstProjectName: ${all.projects[0].name}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "outputs": {
+                "description": "A collection of values returned by getProjects.\n",
+                "properties": {
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "projects": {
+                        "items": {
+                            "$ref": "#/types/hcloudplus:index/getProjectsProject:getProjectsProject"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "projects",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "hcloudplus:index/getUser:getUser": {
+            "description": "The authenticated user (account owner). Reads GET /_user on the Hetzner Cloud Console private API.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as hcloudplus from \"@hatemosphere/pulumi-hcloudplus\";\n\nconst me = hcloudplus.getUser({});\nexport const callerEmail = me.then(me =\u003e me.email);\n```\n```python\nimport pulumi\nimport pulumi_hcloudplus as hcloudplus\n\nme = hcloudplus.get_user()\npulumi.export(\"callerEmail\", me.email)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Hcloudplus = Hatemosphere.Hcloudplus;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var me = Hcloudplus.Index.GetUser.Invoke();\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"callerEmail\"] = me.Apply(getUserResult =\u003e getUserResult.Email),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/hatemosphere/pulumi-hcloudplus/sdk/go/hcloudplus\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tme, err := hcloudplus.GetUser(ctx, map[string]interface{}{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"callerEmail\", me.Email)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.hcloudplus.HcloudplusFunctions;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var me = HcloudplusFunctions.getUser(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference);\n\n        ctx.export(\"callerEmail\", me.email());\n    }\n}\n```\n```yaml\nvariables:\n  me:\n    fn::invoke:\n      function: hcloudplus:getUser\n      arguments: {}\noutputs:\n  callerEmail: ${me.email}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "outputs": {
+                "description": "A collection of values returned by getUser.\n",
+                "properties": {
+                    "companyName": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The ID of this resource.\n",
+                        "type": "integer"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "locale": {
+                        "type": "string"
+                    },
+                    "robotCn": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "companyName",
+                    "currency",
+                    "email",
+                    "firstName",
+                    "id",
+                    "lastName",
+                    "locale",
+                    "robotCn"
+                ],
+                "type": "object"
+            }
+        },
+        "pulumi:providers:hcloudplus/terraformConfig": {
+            "description": "This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.",
+            "inputs": {
+                "properties": {
+                    "__self__": {
+                        "type": "ref",
+                        "$ref": "#/provider"
+                    }
+                },
+                "type": "pulumi:providers:hcloudplus/terraformConfig",
+                "required": [
+                    "__self__"
+                ]
+            },
+            "outputs": {
+                "properties": {
+                    "result": {
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "type": "object"
+            }
+        }
+    }
+}

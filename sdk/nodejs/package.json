@@ -1,0 +1,31 @@
+{
+    "name": "@hatemosphere/pulumi-hcloudplus",
+    "version": "${VERSION}",
+    "description": "A Pulumi provider for Hetzner Cloud's undocumented console API. Manages projects, mints project API tokens, invites members, and reads cross-project audit logs — everything the official hcloud Pulumi/Terraform provider can't reach. Built on terraform-provider-hcloudplus.",
+    "keywords": [
+        "pulumi",
+        "hcloud",
+        "hetzner",
+        "hetzner-cloud",
+        "category/cloud",
+        "kind/native"
+    ],
+    "homepage": "https://github.com/hatemosphere/pulumi-hcloudplus",
+    "repository": "https://github.com/hatemosphere/pulumi-hcloudplus",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.142.0"
+    },
+    "devDependencies": {
+        "@types/node": "^18",
+        "typescript": "^4.3.5"
+    },
+    "pulumi": {
+        "resource": true,
+        "name": "hcloudplus",
+        "server": "github://api.github.com/hatemosphere/pulumi-hcloudplus"
+    }
+}

@@ -1,0 +1,5 @@
+{
+  "resource": true,
+  "name": "hcloudplus",
+  "server": "github://api.github.com/hatemosphere/pulumi-hcloudplus"
+}

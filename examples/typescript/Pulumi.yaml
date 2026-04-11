@@ -1,0 +1,3 @@
+name: pulumi-hcloudplus-example
+runtime: nodejs
+description: Minimal demo of pulumi-hcloudplus + upstream hcloud chaining.

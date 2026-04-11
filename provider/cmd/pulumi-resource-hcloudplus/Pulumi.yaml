@@ -1,0 +1,3 @@
+name: hcloudplus
+description: A Pulumi resource provider for hcloudplus.
+language: schema

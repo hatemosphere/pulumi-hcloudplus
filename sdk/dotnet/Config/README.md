@@ -1,0 +1,1 @@
+A Pulumi provider for Hetzner Cloud's undocumented console API. Manages projects, mints project API tokens, invites members, and reads cross-project audit logs — everything the official hcloud Pulumi/Terraform provider can't reach. Built on terraform-provider-hcloudplus.

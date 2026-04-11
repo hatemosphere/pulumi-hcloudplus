@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build & lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26"
+
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@v6
+
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
+            | sh -s -- -b $(go env GOPATH)/bin v2.11.3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: go mod download
+        working-directory: provider
+        run: go mod download
+
+      - name: Build tfgen + provider binaries
+        run: make provider
+
+      - name: Lint Go code
+        run: make lint
+
+      - name: Regenerate schema and check for drift
+        run: |
+          make schema
+          if ! git diff --exit-code provider/cmd/pulumi-resource-hcloudplus/schema.json provider/cmd/pulumi-resource-hcloudplus/bridge-metadata.json; then
+            echo "::error::schema.json or bridge-metadata.json is out of date — run 'make schema' and commit the result"
+            exit 1
+          fi
+
+      - name: Regenerate nodejs SDK and check for drift
+        run: |
+          make build_nodejs
+          if ! git diff --exit-code sdk/nodejs; then
+            echo "::error::sdk/nodejs is out of date — run 'make build_nodejs' and commit the result"
+            exit 1
+          fi

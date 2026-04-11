@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    name: Build + publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26"
+
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@v6
+
+      - name: Install Node.js (wired to GitHub Packages for @hatemosphere scope)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@hatemosphere"
+
+      - name: Resolve version
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build provider (embeds real version via ldflags)
+        run: VERSION=${{ steps.version.outputs.version }} make provider
+
+      - name: Regenerate schema
+        run: VERSION=${{ steps.version.outputs.version }} make schema
+
+      - name: Regenerate Node.js SDK
+        run: make build_nodejs
+
+      - name: Build Node.js SDK tarball
+        working-directory: sdk/nodejs
+        run: |
+          npm install
+          npm run build
+
+      - name: Publish Node.js SDK to GitHub Packages
+        working-directory: sdk/nodejs/bin
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish
+
+      # Provider plugin binary for Pulumi to download via pluginDownloadURL.
+      # Pulumi expects a tarball named
+      # pulumi-resource-<name>-v<version>-<os>-<arch>.tar.gz at the release
+      # URL the schema advertises.
+      - name: Build cross-platform provider binaries
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          BIN="$PWD/bin-dist"
+          mkdir -p "$BIN"
+          for os_arch in linux-amd64 linux-arm64 darwin-amd64 darwin-arm64 windows-amd64; do
+            os=${os_arch%-*}
+            arch=${os_arch#*-}
+            ext=""
+            [ "$os" = "windows" ] && ext=".exe"
+            out="$BIN/pulumi-resource-hcloudplus$ext"
+            cd provider
+            GOOS=$os GOARCH=$arch go build \
+              -o "$out" \
+              -ldflags "-X github.com/hatemosphere/pulumi-hcloudplus/provider/pkg/version.Version=$VERSION" \
+              ./cmd/pulumi-resource-hcloudplus
+            cd ..
+            tar -C "$BIN" -czf "$BIN/pulumi-resource-hcloudplus-v$VERSION-$os-$arch.tar.gz" "pulumi-resource-hcloudplus$ext"
+            rm "$out"
+          done
+
+      - name: Attach binaries to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: bin-dist/pulumi-resource-hcloudplus-v*.tar.gz
+          generate_release_notes: true

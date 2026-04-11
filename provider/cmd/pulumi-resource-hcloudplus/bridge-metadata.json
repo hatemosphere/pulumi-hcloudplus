@@ -1,0 +1,46 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "hcloudplus_project": {
+                "current": "hcloudplus:index/project:Project"
+            },
+            "hcloudplus_project_invitation": {
+                "current": "hcloudplus:index/projectInvitation:ProjectInvitation"
+            },
+            "hcloudplus_project_token": {
+                "current": "hcloudplus:index/projectToken:ProjectToken"
+            }
+        },
+        "datasources": {
+            "hcloudplus_activities": {
+                "current": "hcloudplus:index/getActivities:getActivities",
+                "fields": {
+                    "activities": {
+                        "maxItemsOne": false
+                    },
+                    "project_ids": {
+                        "maxItemsOne": false
+                    },
+                    "types": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "hcloudplus_limits": {
+                "current": "hcloudplus:index/getLimits:getLimits"
+            },
+            "hcloudplus_projects": {
+                "current": "hcloudplus:index/getProjects:getProjects",
+                "fields": {
+                    "projects": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "hcloudplus_user": {
+                "current": "hcloudplus:index/getUser:getUser"
+            }
+        }
+    },
+    "auto-settings": {}
+}
