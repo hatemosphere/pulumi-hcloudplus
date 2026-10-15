@@ -11,7 +11,6 @@ import com.pulumi.hcloudplus.ProjectInvitationArgs;
 import com.pulumi.hcloudplus.Utilities;
 import com.pulumi.hcloudplus.inputs.ProjectInvitationState;
 import java.lang.Boolean;
-import java.lang.Integer;
 import java.lang.String;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -133,17 +132,17 @@ public class ProjectInvitation extends com.pulumi.resources.CustomResource {
         return this.expired;
     }
     /**
-     * ID of the project to invite the user into.
+     * ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    @Export(name="projectId", refs={Integer.class}, tree="[0]")
-    private Output<Integer> projectId;
+    @Export(name="projectId", refs={String.class}, tree="[0]")
+    private Output<String> projectId;
 
     /**
-     * @return ID of the project to invite the user into.
+     * @return ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public Output<Integer> projectId() {
+    public Output<String> projectId() {
         return this.projectId;
     }
     /**

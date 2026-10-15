@@ -9,7 +9,7 @@ go 1.27
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20260318212141-5525259d096b
 
 require (
-	github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015074604-77ed508d6d3a
+	github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015075821-eaeba1c04117
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.126.0
 )
 

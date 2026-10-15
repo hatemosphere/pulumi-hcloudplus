@@ -43,10 +43,10 @@ public final class GetActivitiesResult {
      */
     private @Nullable Integer perPage;
     /**
-     * @return Filter to specific project IDs.
+     * @return Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    private @Nullable List<Integer> projectIds;
+    private @Nullable List<String> projectIds;
     /**
      * @return Filter by activity type (e.g. &#39;server.create&#39;, &#39;token.create&#39;).
      * 
@@ -93,10 +93,10 @@ public final class GetActivitiesResult {
         return Optional.ofNullable(this.perPage);
     }
     /**
-     * @return Filter to specific project IDs.
+     * @return Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public List<Integer> projectIds() {
+    public List<String> projectIds() {
         return this.projectIds == null ? List.of() : this.projectIds;
     }
     /**
@@ -122,7 +122,7 @@ public final class GetActivitiesResult {
         private String id;
         private @Nullable Boolean includeUserActivities;
         private @Nullable Integer perPage;
-        private @Nullable List<Integer> projectIds;
+        private @Nullable List<String> projectIds;
         private @Nullable List<String> types;
         public Builder() {}
         public Builder(GetActivitiesResult defaults) {
@@ -181,12 +181,12 @@ public final class GetActivitiesResult {
             return this;
         }
         @CustomType.Setter
-        public Builder projectIds(@Nullable List<Integer> projectIds) {
+        public Builder projectIds(@Nullable List<String> projectIds) {
 
             this.projectIds = projectIds;
             return this;
         }
-        public Builder projectIds(Integer... projectIds) {
+        public Builder projectIds(String... projectIds) {
             return projectIds(List.of(projectIds));
         }
         @CustomType.Setter

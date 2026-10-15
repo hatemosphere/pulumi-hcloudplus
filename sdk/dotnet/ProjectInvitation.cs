@@ -79,10 +79,10 @@ namespace Hatemosphere.Hcloudplus
         public Output<string> Expired { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the project to invite the user into.
+        /// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         /// </summary>
         [Output("projectId")]
-        public Output<int> ProjectId { get; private set; } = null!;
+        public Output<string> ProjectId { get; private set; } = null!;
 
         /// <summary>
         /// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
@@ -150,10 +150,10 @@ namespace Hatemosphere.Hcloudplus
         public Input<string> Email { get; set; } = null!;
 
         /// <summary>
-        /// ID of the project to invite the user into.
+        /// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         /// </summary>
         [Input("projectId", required: true)]
-        public Input<int> ProjectId { get; set; } = null!;
+        public Input<string> ProjectId { get; set; } = null!;
 
         /// <summary>
         /// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
@@ -200,10 +200,10 @@ namespace Hatemosphere.Hcloudplus
         public Input<string>? Expired { get; set; }
 
         /// <summary>
-        /// ID of the project to invite the user into.
+        /// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         /// </summary>
         [Input("projectId")]
-        public Input<int>? ProjectId { get; set; }
+        public Input<string>? ProjectId { get; set; }
 
         /// <summary>
         /// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.

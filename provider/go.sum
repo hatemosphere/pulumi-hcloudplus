@@ -1101,8 +1101,8 @@ github.com/hatemosphere/hcloud-go-plus v0.0.0-20261015074409-471967e96442 h1:tV7
 github.com/hatemosphere/hcloud-go-plus v0.0.0-20261015074409-471967e96442/go.mod h1:sZTxvAqiZp/3xrG975nhMBdT/UoMZnrdtOozYwFnBKk=
 github.com/hatemosphere/hcloud-go-plus/authbrowser v0.0.0-20261015074409-471967e96442 h1:bVNhwvQgkQFwHBVENGk525xymUrHO4x80Yv4IB/RkO8=
 github.com/hatemosphere/hcloud-go-plus/authbrowser v0.0.0-20261015074409-471967e96442/go.mod h1:sTKX2BnFLqZsuYtJaWjGX4KgiQtm9gohL51IYj/mrVw=
-github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015074604-77ed508d6d3a h1:XlgH4kxcts1v7tAigCIMiHa+iEJX/d9qMGqSaHJ0bLE=
-github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015074604-77ed508d6d3a/go.mod h1:vAzueQiJxM0ySw17B5+7NeKe8BeQLHB+ek0Ah23t6bA=
+github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015075821-eaeba1c04117 h1:gSk2kiYZFrVcMoAXLxNfW4F+aQMm5p+lxucVG/POQP8=
+github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015075821-eaeba1c04117/go.mod h1:jeoQYNPprOmokMxea25mIJeGFqMBGoHbqHlgkF1czro=
 github.com/hexops/autogold v1.3.0 h1:IEtGNPxBeBu8RMn8eKWh/Ll9dVNgSnJ7bp/qHgMQ14o=
 github.com/hexops/autogold v1.3.0/go.mod h1:d4hwi2rid66Sag+BVuHgwakW/EmaFr8vdTSbWDbrDRI=
 github.com/hexops/autogold/v2 v2.2.1 h1:JPUXuZQGkcQMv7eeDXuNMovjfoRYaa0yVcm+F3voaGY=

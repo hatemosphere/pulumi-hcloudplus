@@ -6,7 +6,6 @@ package com.pulumi.hcloudplus.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
-import java.lang.Integer;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,17 +77,17 @@ public final class ProjectInvitationState extends com.pulumi.resources.ResourceA
     }
 
     /**
-     * ID of the project to invite the user into.
+     * ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
     @Import(name="projectId")
-    private @Nullable Output<Integer> projectId;
+    private @Nullable Output<String> projectId;
 
     /**
-     * @return ID of the project to invite the user into.
+     * @return ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public Optional<Output<Integer>> projectId() {
+    public Optional<Output<String>> projectId() {
         return Optional.ofNullable(this.projectId);
     }
 
@@ -237,23 +236,23 @@ public final class ProjectInvitationState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param projectId ID of the project to invite the user into.
+         * @param projectId ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectId(@Nullable Output<Integer> projectId) {
+        public Builder projectId(@Nullable Output<String> projectId) {
             $.projectId = projectId;
             return this;
         }
 
         /**
-         * @param projectId ID of the project to invite the user into.
+         * @param projectId ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectId(Integer projectId) {
+        public Builder projectId(String projectId) {
             return projectId(Output.of(projectId));
         }
 

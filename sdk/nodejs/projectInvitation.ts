@@ -79,9 +79,9 @@ export class ProjectInvitation extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly expired: pulumi.Output<string>;
     /**
-     * ID of the project to invite the user into.
+     * ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      */
-    declare public readonly projectId: pulumi.Output<number>;
+    declare public readonly projectId: pulumi.Output<string>;
     /**
      * If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
      */
@@ -156,9 +156,9 @@ export interface ProjectInvitationState {
      */
     expired?: pulumi.Input<string | undefined>;
     /**
-     * ID of the project to invite the user into.
+     * ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      */
-    projectId?: pulumi.Input<number | undefined>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
      */
@@ -178,9 +178,9 @@ export interface ProjectInvitationArgs {
      */
     email: pulumi.Input<string>;
     /**
-     * ID of the project to invite the user into.
+     * ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
      */
-    projectId: pulumi.Input<number>;
+    projectId: pulumi.Input<string>;
     /**
      * If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
      */

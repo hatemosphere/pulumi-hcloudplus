@@ -71,8 +71,8 @@ type ProjectInvitation struct {
 	Email pulumi.StringOutput `pulumi:"email"`
 	// RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
 	Expired pulumi.StringOutput `pulumi:"expired"`
-	// ID of the project to invite the user into.
-	ProjectId pulumi.IntOutput `pulumi:"projectId"`
+	// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
 	ReinviteOnExpiry pulumi.BoolPtrOutput `pulumi:"reinviteOnExpiry"`
 	// Role to grant on acceptance. One of: admin, member, restricted.
@@ -126,8 +126,8 @@ type projectInvitationState struct {
 	Email *string `pulumi:"email"`
 	// RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
 	Expired *string `pulumi:"expired"`
-	// ID of the project to invite the user into.
-	ProjectId *int `pulumi:"projectId"`
+	// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId *string `pulumi:"projectId"`
 	// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
 	ReinviteOnExpiry *bool `pulumi:"reinviteOnExpiry"`
 	// Role to grant on acceptance. One of: admin, member, restricted.
@@ -143,8 +143,8 @@ type ProjectInvitationState struct {
 	Email pulumi.StringPtrInput
 	// RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
 	Expired pulumi.StringPtrInput
-	// ID of the project to invite the user into.
-	ProjectId pulumi.IntPtrInput
+	// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId pulumi.StringPtrInput
 	// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
 	ReinviteOnExpiry pulumi.BoolPtrInput
 	// Role to grant on acceptance. One of: admin, member, restricted.
@@ -158,8 +158,8 @@ func (ProjectInvitationState) ElementType() reflect.Type {
 type projectInvitationArgs struct {
 	// Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
 	Email string `pulumi:"email"`
-	// ID of the project to invite the user into.
-	ProjectId int `pulumi:"projectId"`
+	// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId string `pulumi:"projectId"`
 	// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
 	ReinviteOnExpiry *bool `pulumi:"reinviteOnExpiry"`
 	// Role to grant on acceptance. One of: admin, member, restricted.
@@ -170,8 +170,8 @@ type projectInvitationArgs struct {
 type ProjectInvitationArgs struct {
 	// Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
 	Email pulumi.StringInput
-	// ID of the project to invite the user into.
-	ProjectId pulumi.IntInput
+	// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId pulumi.StringInput
 	// If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
 	ReinviteOnExpiry pulumi.BoolPtrInput
 	// Role to grant on acceptance. One of: admin, member, restricted.
@@ -285,9 +285,9 @@ func (o ProjectInvitationOutput) Expired() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProjectInvitation) pulumi.StringOutput { return v.Expired }).(pulumi.StringOutput)
 }
 
-// ID of the project to invite the user into.
-func (o ProjectInvitationOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v *ProjectInvitation) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
+// ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
+func (o ProjectInvitationOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProjectInvitation) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
 }
 
 // If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.

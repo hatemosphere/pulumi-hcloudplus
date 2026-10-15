@@ -78,17 +78,17 @@ public final class GetActivitiesPlainArgs extends com.pulumi.resources.InvokeArg
     }
 
     /**
-     * Filter to specific project IDs.
+     * Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      * 
      */
     @Import(name="projectIds")
-    private @Nullable List<Integer> projectIds;
+    private @Nullable List<String> projectIds;
 
     /**
-     * @return Filter to specific project IDs.
+     * @return Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public Optional<List<Integer>> projectIds() {
+    public Optional<List<String>> projectIds() {
         return Optional.ofNullable(this.projectIds);
     }
 
@@ -181,23 +181,23 @@ public final class GetActivitiesPlainArgs extends com.pulumi.resources.InvokeArg
         }
 
         /**
-         * @param projectIds Filter to specific project IDs.
+         * @param projectIds Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectIds(@Nullable List<Integer> projectIds) {
+        public Builder projectIds(@Nullable List<String> projectIds) {
             $.projectIds = projectIds;
             return this;
         }
 
         /**
-         * @param projectIds Filter to specific project IDs.
+         * @param projectIds Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectIds(Integer... projectIds) {
+        public Builder projectIds(String... projectIds) {
             return projectIds(List.of(projectIds));
         }
 

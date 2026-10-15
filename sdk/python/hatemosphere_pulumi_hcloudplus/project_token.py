@@ -20,13 +20,13 @@ __all__ = ['ProjectTokenArgs', 'ProjectToken']
 class ProjectTokenArgs:
     def __init__(__self__, *,
                  description: pulumi.Input[_builtins.str],
-                 project_id: pulumi.Input[_builtins.int],
+                 project_id: pulumi.Input[_builtins.str],
                  readonly: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ProjectToken resource.
 
         :param pulumi.Input[_builtins.str] description: Human-readable description of the token (shown in the Hetzner console).
-        :param pulumi.Input[_builtins.int] project_id: ID of the project this token belongs to.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] readonly: Whether the token has read-only scope. Defaults to false (read-write).
         """
         pulumi.set(__self__, "description", description)
@@ -48,14 +48,14 @@ class ProjectTokenArgs:
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Input[_builtins.int]:
+    def project_id(self) -> pulumi.Input[_builtins.str]:
         """
-        ID of the project this token belongs to.
+        ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: pulumi.Input[_builtins.int]):
+    def project_id(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
@@ -76,7 +76,7 @@ class _ProjectTokenState:
     def __init__(__self__, *,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  prefix: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  readonly: pulumi.Input[Optional[_builtins.bool]] = None,
                  secret: pulumi.Input[Optional[_builtins.str]] = None):
         """
@@ -84,7 +84,7 @@ class _ProjectTokenState:
 
         :param pulumi.Input[_builtins.str] description: Human-readable description of the token (shown in the Hetzner console).
         :param pulumi.Input[_builtins.str] prefix: First-half prefix of the token, used to identify it in audit logs.
-        :param pulumi.Input[_builtins.int] project_id: ID of the project this token belongs to.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] readonly: Whether the token has read-only scope. Defaults to false (read-write).
         :param pulumi.Input[_builtins.str] secret: The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
         """
@@ -125,14 +125,14 @@ class _ProjectTokenState:
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+    def project_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the project this token belongs to.
+        ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+    def project_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
@@ -167,7 +167,7 @@ class ProjectToken(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  readonly: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
@@ -206,7 +206,7 @@ class ProjectToken(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: Human-readable description of the token (shown in the Hetzner console).
-        :param pulumi.Input[_builtins.int] project_id: ID of the project this token belongs to.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] readonly: Whether the token has read-only scope. Defaults to false (read-write).
         """
         ...
@@ -264,7 +264,7 @@ class ProjectToken(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  readonly: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -298,7 +298,7 @@ class ProjectToken(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             prefix: pulumi.Input[Optional[_builtins.str]] = None,
-            project_id: pulumi.Input[Optional[_builtins.int]] = None,
+            project_id: pulumi.Input[Optional[_builtins.str]] = None,
             readonly: pulumi.Input[Optional[_builtins.bool]] = None,
             secret: pulumi.Input[Optional[_builtins.str]] = None) -> 'ProjectToken':
         """
@@ -310,7 +310,7 @@ class ProjectToken(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: Human-readable description of the token (shown in the Hetzner console).
         :param pulumi.Input[_builtins.str] prefix: First-half prefix of the token, used to identify it in audit logs.
-        :param pulumi.Input[_builtins.int] project_id: ID of the project this token belongs to.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] readonly: Whether the token has read-only scope. Defaults to false (read-write).
         :param pulumi.Input[_builtins.str] secret: The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
         """
@@ -343,9 +343,9 @@ class ProjectToken(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Output[_builtins.int]:
+    def project_id(self) -> pulumi.Output[_builtins.str]:
         """
-        ID of the project this token belongs to.
+        ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_id")
 

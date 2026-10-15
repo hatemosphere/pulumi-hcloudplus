@@ -66,9 +66,9 @@ export interface GetActivitiesArgs {
      */
     perPage?: number;
     /**
-     * Filter to specific project IDs.
+     * Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      */
-    projectIds?: number[];
+    projectIds?: string[];
     /**
      * Filter by activity type (e.g. 'server.create', 'token.create').
      */
@@ -101,9 +101,9 @@ export interface GetActivitiesResult {
      */
     readonly perPage?: number;
     /**
-     * Filter to specific project IDs.
+     * Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      */
-    readonly projectIds?: number[];
+    readonly projectIds?: string[];
     /**
      * Filter by activity type (e.g. 'server.create', 'token.create').
      */
@@ -169,9 +169,9 @@ export interface GetActivitiesOutputArgs {
      */
     perPage?: pulumi.Input<number | undefined>;
     /**
-     * Filter to specific project IDs.
+     * Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    projectIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by activity type (e.g. 'server.create', 'token.create').
      */

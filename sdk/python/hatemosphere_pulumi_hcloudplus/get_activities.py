@@ -100,9 +100,9 @@ class GetActivitiesResult:
 
     @_builtins.property
     @pulumi.getter(name="projectIds")
-    def project_ids(self) -> Optional[Sequence[_builtins.int]]:
+    def project_ids(self) -> Optional[Sequence[_builtins.str]]:
         """
-        Filter to specific project IDs.
+        Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_ids")
 
@@ -135,7 +135,7 @@ def get_activities(created_after: Optional[_builtins.str] = None,
                    created_before: Optional[_builtins.str] = None,
                    include_user_activities: Optional[_builtins.bool] = None,
                    per_page: Optional[_builtins.int] = None,
-                   project_ids: Optional[Sequence[_builtins.int]] = None,
+                   project_ids: Optional[Sequence[_builtins.str]] = None,
                    types: Optional[Sequence[_builtins.str]] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetActivitiesResult:
     """
@@ -165,7 +165,7 @@ def get_activities(created_after: Optional[_builtins.str] = None,
     :param _builtins.str created_before: RFC 3339 upper time bound. Window capped at 31 days.
     :param _builtins.bool include_user_activities: Include account-level events (logins, etc). At least one of include*user*activities or<span pulumi-lang-nodejs=" projectIds " pulumi-lang-dotnet=" ProjectIds " pulumi-lang-go=" projectIds " pulumi-lang-python=" project_ids " pulumi-lang-yaml=" projectIds " pulumi-lang-java=" projectIds "> projectIds </span>is required.
     :param _builtins.int per_page: Page size (default 25, max 500).
-    :param Sequence[_builtins.int] project_ids: Filter to specific project IDs.
+    :param Sequence[_builtins.str] project_ids: Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
     :param Sequence[_builtins.str] types: Filter by activity type (e.g. 'server.create', 'token.create').
     """
     __args__ = dict()
@@ -191,7 +191,7 @@ def get_activities_output(created_after: pulumi.Input[Optional[Optional[_builtin
                           created_before: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                           include_user_activities: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
                           per_page: pulumi.Input[Optional[Optional[_builtins.int]]] = None,
-                          project_ids: pulumi.Input[Optional[Optional[Sequence[_builtins.int]]]] = None,
+                          project_ids: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
                           types: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetActivitiesResult]:
     """
@@ -221,7 +221,7 @@ def get_activities_output(created_after: pulumi.Input[Optional[Optional[_builtin
     :param _builtins.str created_before: RFC 3339 upper time bound. Window capped at 31 days.
     :param _builtins.bool include_user_activities: Include account-level events (logins, etc). At least one of include*user*activities or<span pulumi-lang-nodejs=" projectIds " pulumi-lang-dotnet=" ProjectIds " pulumi-lang-go=" projectIds " pulumi-lang-python=" project_ids " pulumi-lang-yaml=" projectIds " pulumi-lang-java=" projectIds "> projectIds </span>is required.
     :param _builtins.int per_page: Page size (default 25, max 500).
-    :param Sequence[_builtins.int] project_ids: Filter to specific project IDs.
+    :param Sequence[_builtins.str] project_ids: Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
     :param Sequence[_builtins.str] types: Filter by activity type (e.g. 'server.create', 'token.create').
     """
     __args__ = dict()

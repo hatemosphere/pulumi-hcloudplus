@@ -335,8 +335,8 @@
                     "description": "RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the \u003cspan pulumi-lang-nodejs=\"`reinviteOnExpiry`\" pulumi-lang-dotnet=\"`ReinviteOnExpiry`\" pulumi-lang-go=\"`reinviteOnExpiry`\" pulumi-lang-python=\"`reinvite_on_expiry`\" pulumi-lang-yaml=\"`reinviteOnExpiry`\" pulumi-lang-java=\"`reinviteOnExpiry`\"\u003e`reinviteOnExpiry`\u003c/span\u003e attribute to mint a fresh invitation.\n"
                 },
                 "projectId": {
-                    "type": "integer",
-                    "description": "ID of the project to invite the user into.\n"
+                    "type": "string",
+                    "description": "ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).\n"
                 },
                 "reinviteOnExpiry": {
                     "type": "boolean",
@@ -361,8 +361,8 @@
                     "description": "Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.\n"
                 },
                 "projectId": {
-                    "type": "integer",
-                    "description": "ID of the project to invite the user into.\n"
+                    "type": "string",
+                    "description": "ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).\n"
                 },
                 "reinviteOnExpiry": {
                     "type": "boolean",
@@ -398,8 +398,8 @@
                         "description": "RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the \u003cspan pulumi-lang-nodejs=\"`reinviteOnExpiry`\" pulumi-lang-dotnet=\"`ReinviteOnExpiry`\" pulumi-lang-go=\"`reinviteOnExpiry`\" pulumi-lang-python=\"`reinvite_on_expiry`\" pulumi-lang-yaml=\"`reinviteOnExpiry`\" pulumi-lang-java=\"`reinviteOnExpiry`\"\u003e`reinviteOnExpiry`\u003c/span\u003e attribute to mint a fresh invitation.\n"
                     },
                     "projectId": {
-                        "type": "integer",
-                        "description": "ID of the project to invite the user into.\n"
+                        "type": "string",
+                        "description": "ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).\n"
                     },
                     "reinviteOnExpiry": {
                         "type": "boolean",
@@ -425,8 +425,8 @@
                     "description": "First-half prefix of the token, used to identify it in audit logs.\n"
                 },
                 "projectId": {
-                    "type": "integer",
-                    "description": "ID of the project this token belongs to.\n"
+                    "type": "string",
+                    "description": "ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).\n"
                 },
                 "readonly": {
                     "type": "boolean",
@@ -451,8 +451,8 @@
                     "description": "Human-readable description of the token (shown in the Hetzner console).\n"
                 },
                 "projectId": {
-                    "type": "integer",
-                    "description": "ID of the project this token belongs to.\n"
+                    "type": "string",
+                    "description": "ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).\n"
                 },
                 "readonly": {
                     "type": "boolean",
@@ -475,8 +475,8 @@
                         "description": "First-half prefix of the token, used to identify it in audit logs.\n"
                     },
                     "projectId": {
-                        "type": "integer",
-                        "description": "ID of the project this token belongs to.\n"
+                        "type": "string",
+                        "description": "ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).\n"
                     },
                     "readonly": {
                         "type": "boolean",
@@ -517,9 +517,9 @@
                     "projectIds": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string"
                         },
-                        "description": "Filter to specific project IDs.\n"
+                        "description": "Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).\n"
                     },
                     "types": {
                         "type": "array",
@@ -561,9 +561,9 @@
                         "type": "integer"
                     },
                     "projectIds": {
-                        "description": "Filter to specific project IDs.\n",
+                        "description": "Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).\n",
                         "items": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "type": "array"
                     },

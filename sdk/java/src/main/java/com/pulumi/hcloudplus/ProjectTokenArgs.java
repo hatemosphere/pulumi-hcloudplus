@@ -7,7 +7,6 @@ import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
-import java.lang.Integer;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,17 +33,17 @@ public final class ProjectTokenArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * ID of the project this token belongs to.
+     * ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
     @Import(name="projectId", required=true)
-    private Output<Integer> projectId;
+    private Output<String> projectId;
 
     /**
-     * @return ID of the project this token belongs to.
+     * @return ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public Output<Integer> projectId() {
+    public Output<String> projectId() {
         return this.projectId;
     }
 
@@ -111,23 +110,23 @@ public final class ProjectTokenArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param projectId ID of the project this token belongs to.
+         * @param projectId ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectId(Output<Integer> projectId) {
+        public Builder projectId(Output<String> projectId) {
             $.projectId = projectId;
             return this;
         }
 
         /**
-         * @param projectId ID of the project this token belongs to.
+         * @param projectId ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectId(Integer projectId) {
+        public Builder projectId(String projectId) {
             return projectId(Output.of(projectId));
         }
 

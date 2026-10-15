@@ -20,14 +20,14 @@ __all__ = ['ProjectInvitationArgs', 'ProjectInvitation']
 class ProjectInvitationArgs:
     def __init__(__self__, *,
                  email: pulumi.Input[_builtins.str],
-                 project_id: pulumi.Input[_builtins.int],
+                 project_id: pulumi.Input[_builtins.str],
                  role: pulumi.Input[_builtins.str],
                  reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ProjectInvitation resource.
 
         :param pulumi.Input[_builtins.str] email: Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
-        :param pulumi.Input[_builtins.int] project_id: ID of the project to invite the user into.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.str] role: Role to grant on acceptance. One of: admin, member, restricted.
         :param pulumi.Input[_builtins.bool] reinvite_on_expiry: If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
         """
@@ -51,14 +51,14 @@ class ProjectInvitationArgs:
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Input[_builtins.int]:
+    def project_id(self) -> pulumi.Input[_builtins.str]:
         """
-        ID of the project to invite the user into.
+        ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: pulumi.Input[_builtins.int]):
+    def project_id(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
@@ -93,7 +93,7 @@ class _ProjectInvitationState:
                  created: pulumi.Input[Optional[_builtins.str]] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  expired: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
                  role: pulumi.Input[Optional[_builtins.str]] = None):
         """
@@ -103,7 +103,7 @@ class _ProjectInvitationState:
         :param pulumi.Input[_builtins.str] created: RFC 3339 timestamp when the invitation was sent.
         :param pulumi.Input[_builtins.str] email: Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
         :param pulumi.Input[_builtins.str] expired: RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
-        :param pulumi.Input[_builtins.int] project_id: ID of the project to invite the user into.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] reinvite_on_expiry: If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
         :param pulumi.Input[_builtins.str] role: Role to grant on acceptance. One of: admin, member, restricted.
         """
@@ -172,14 +172,14 @@ class _ProjectInvitationState:
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+    def project_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the project to invite the user into.
+        ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+    def project_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
@@ -214,7 +214,7 @@ class ProjectInvitation(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
                  role: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -251,7 +251,7 @@ class ProjectInvitation(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] email: Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
-        :param pulumi.Input[_builtins.int] project_id: ID of the project to invite the user into.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] reinvite_on_expiry: If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
         :param pulumi.Input[_builtins.str] role: Role to grant on acceptance. One of: admin, member, restricted.
         """
@@ -307,7 +307,7 @@ class ProjectInvitation(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
                  role: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -346,7 +346,7 @@ class ProjectInvitation(pulumi.CustomResource):
             created: pulumi.Input[Optional[_builtins.str]] = None,
             email: pulumi.Input[Optional[_builtins.str]] = None,
             expired: pulumi.Input[Optional[_builtins.str]] = None,
-            project_id: pulumi.Input[Optional[_builtins.int]] = None,
+            project_id: pulumi.Input[Optional[_builtins.str]] = None,
             reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
             role: pulumi.Input[Optional[_builtins.str]] = None) -> 'ProjectInvitation':
         """
@@ -360,7 +360,7 @@ class ProjectInvitation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] created: RFC 3339 timestamp when the invitation was sent.
         :param pulumi.Input[_builtins.str] email: Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
         :param pulumi.Input[_builtins.str] expired: RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
-        :param pulumi.Input[_builtins.int] project_id: ID of the project to invite the user into.
+        :param pulumi.Input[_builtins.str] project_id: ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         :param pulumi.Input[_builtins.bool] reinvite_on_expiry: If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
         :param pulumi.Input[_builtins.str] role: Role to grant on acceptance. One of: admin, member, restricted.
         """
@@ -411,9 +411,9 @@ class ProjectInvitation(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Output[_builtins.int]:
+    def project_id(self) -> pulumi.Output[_builtins.str]:
         """
-        ID of the project to invite the user into.
+        ID of the project to invite the user into, as a string (e.g. `hcloudplus_project.x.id`).
         """
         return pulumi.get(self, "project_id")
 

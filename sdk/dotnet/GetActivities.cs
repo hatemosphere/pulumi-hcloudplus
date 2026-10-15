@@ -542,14 +542,14 @@ namespace Hatemosphere.Hcloudplus
         public int? PerPage { get; set; }
 
         [Input("projectIds")]
-        private List<int>? _projectIds;
+        private List<string>? _projectIds;
 
         /// <summary>
-        /// Filter to specific project IDs.
+        /// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
         /// </summary>
-        public List<int> ProjectIds
+        public List<string> ProjectIds
         {
-            get => _projectIds ?? (_projectIds = new List<int>());
+            get => _projectIds ?? (_projectIds = new List<string>());
             set => _projectIds = value;
         }
 
@@ -598,14 +598,14 @@ namespace Hatemosphere.Hcloudplus
         public Input<int>? PerPage { get; set; }
 
         [Input("projectIds")]
-        private InputList<int>? _projectIds;
+        private InputList<string>? _projectIds;
 
         /// <summary>
-        /// Filter to specific project IDs.
+        /// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
         /// </summary>
-        public InputList<int> ProjectIds
+        public InputList<string> ProjectIds
         {
-            get => _projectIds ?? (_projectIds = new InputList<int>());
+            get => _projectIds ?? (_projectIds = new InputList<string>());
             set => _projectIds = value;
         }
 
@@ -653,9 +653,9 @@ namespace Hatemosphere.Hcloudplus
         /// </summary>
         public readonly int? PerPage;
         /// <summary>
-        /// Filter to specific project IDs.
+        /// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
         /// </summary>
-        public readonly ImmutableArray<int> ProjectIds;
+        public readonly ImmutableArray<string> ProjectIds;
         /// <summary>
         /// Filter by activity type (e.g. 'server.create', 'token.create').
         /// </summary>
@@ -675,7 +675,7 @@ namespace Hatemosphere.Hcloudplus
 
             int? perPage,
 
-            ImmutableArray<int> projectIds,
+            ImmutableArray<string> projectIds,
 
             ImmutableArray<string> types)
         {

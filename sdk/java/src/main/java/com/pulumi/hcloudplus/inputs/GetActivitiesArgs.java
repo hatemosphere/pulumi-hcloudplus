@@ -79,17 +79,17 @@ public final class GetActivitiesArgs extends com.pulumi.resources.InvokeArgs {
     }
 
     /**
-     * Filter to specific project IDs.
+     * Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      * 
      */
     @Import(name="projectIds")
-    private @Nullable Output<List<Integer>> projectIds;
+    private @Nullable Output<List<String>> projectIds;
 
     /**
-     * @return Filter to specific project IDs.
+     * @return Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public Optional<Output<List<Integer>>> projectIds() {
+    public Optional<Output<List<String>>> projectIds() {
         return Optional.ofNullable(this.projectIds);
     }
 
@@ -222,33 +222,33 @@ public final class GetActivitiesArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param projectIds Filter to specific project IDs.
+         * @param projectIds Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectIds(@Nullable Output<List<Integer>> projectIds) {
+        public Builder projectIds(@Nullable Output<List<String>> projectIds) {
             $.projectIds = projectIds;
             return this;
         }
 
         /**
-         * @param projectIds Filter to specific project IDs.
+         * @param projectIds Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectIds(List<Integer> projectIds) {
+        public Builder projectIds(List<String> projectIds) {
             return projectIds(Output.of(projectIds));
         }
 
         /**
-         * @param projectIds Filter to specific project IDs.
+         * @param projectIds Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
          * 
          * @return builder
          * 
          */
-        public Builder projectIds(Integer... projectIds) {
+        public Builder projectIds(String... projectIds) {
             return projectIds(List.of(projectIds));
         }
 

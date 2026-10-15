@@ -74,9 +74,9 @@ export class ProjectToken extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly prefix: pulumi.Output<string>;
     /**
-     * ID of the project this token belongs to.
+     * ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      */
-    declare public readonly projectId: pulumi.Output<number>;
+    declare public readonly projectId: pulumi.Output<string>;
     /**
      * Whether the token has read-only scope. Defaults to false (read-write).
      */
@@ -138,9 +138,9 @@ export interface ProjectTokenState {
      */
     prefix?: pulumi.Input<string | undefined>;
     /**
-     * ID of the project this token belongs to.
+     * ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      */
-    projectId?: pulumi.Input<number | undefined>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Whether the token has read-only scope. Defaults to false (read-write).
      */
@@ -160,9 +160,9 @@ export interface ProjectTokenArgs {
      */
     description: pulumi.Input<string>;
     /**
-     * ID of the project this token belongs to.
+     * ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      */
-    projectId: pulumi.Input<number>;
+    projectId: pulumi.Input<string>;
     /**
      * Whether the token has read-only scope. Defaults to false (read-write).
      */

@@ -70,10 +70,10 @@ namespace Hatemosphere.Hcloudplus
         public Output<string> Prefix { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the project this token belongs to.
+        /// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         /// </summary>
         [Output("projectId")]
-        public Output<int> ProjectId { get; private set; } = null!;
+        public Output<string> ProjectId { get; private set; } = null!;
 
         /// <summary>
         /// Whether the token has read-only scope. Defaults to false (read-write).
@@ -145,10 +145,10 @@ namespace Hatemosphere.Hcloudplus
         public Input<string> Description { get; set; } = null!;
 
         /// <summary>
-        /// ID of the project this token belongs to.
+        /// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         /// </summary>
         [Input("projectId", required: true)]
-        public Input<int> ProjectId { get; set; } = null!;
+        public Input<string> ProjectId { get; set; } = null!;
 
         /// <summary>
         /// Whether the token has read-only scope. Defaults to false (read-write).
@@ -177,10 +177,10 @@ namespace Hatemosphere.Hcloudplus
         public Input<string>? Prefix { get; set; }
 
         /// <summary>
-        /// ID of the project this token belongs to.
+        /// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
         /// </summary>
         [Input("projectId")]
-        public Input<int>? ProjectId { get; set; }
+        public Input<string>? ProjectId { get; set; }
 
         /// <summary>
         /// Whether the token has read-only scope. Defaults to false (read-write).

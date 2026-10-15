@@ -70,8 +70,8 @@ type ProjectToken struct {
 	Description pulumi.StringOutput `pulumi:"description"`
 	// First-half prefix of the token, used to identify it in audit logs.
 	Prefix pulumi.StringOutput `pulumi:"prefix"`
-	// ID of the project this token belongs to.
-	ProjectId pulumi.IntOutput `pulumi:"projectId"`
+	// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// Whether the token has read-only scope. Defaults to false (read-write).
 	Readonly pulumi.BoolOutput `pulumi:"readonly"`
 	// The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
@@ -122,8 +122,8 @@ type projectTokenState struct {
 	Description *string `pulumi:"description"`
 	// First-half prefix of the token, used to identify it in audit logs.
 	Prefix *string `pulumi:"prefix"`
-	// ID of the project this token belongs to.
-	ProjectId *int `pulumi:"projectId"`
+	// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId *string `pulumi:"projectId"`
 	// Whether the token has read-only scope. Defaults to false (read-write).
 	Readonly *bool `pulumi:"readonly"`
 	// The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
@@ -135,8 +135,8 @@ type ProjectTokenState struct {
 	Description pulumi.StringPtrInput
 	// First-half prefix of the token, used to identify it in audit logs.
 	Prefix pulumi.StringPtrInput
-	// ID of the project this token belongs to.
-	ProjectId pulumi.IntPtrInput
+	// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId pulumi.StringPtrInput
 	// Whether the token has read-only scope. Defaults to false (read-write).
 	Readonly pulumi.BoolPtrInput
 	// The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
@@ -150,8 +150,8 @@ func (ProjectTokenState) ElementType() reflect.Type {
 type projectTokenArgs struct {
 	// Human-readable description of the token (shown in the Hetzner console).
 	Description string `pulumi:"description"`
-	// ID of the project this token belongs to.
-	ProjectId int `pulumi:"projectId"`
+	// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId string `pulumi:"projectId"`
 	// Whether the token has read-only scope. Defaults to false (read-write).
 	Readonly *bool `pulumi:"readonly"`
 }
@@ -160,8 +160,8 @@ type projectTokenArgs struct {
 type ProjectTokenArgs struct {
 	// Human-readable description of the token (shown in the Hetzner console).
 	Description pulumi.StringInput
-	// ID of the project this token belongs to.
-	ProjectId pulumi.IntInput
+	// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
+	ProjectId pulumi.StringInput
 	// Whether the token has read-only scope. Defaults to false (read-write).
 	Readonly pulumi.BoolPtrInput
 }
@@ -263,9 +263,9 @@ func (o ProjectTokenOutput) Prefix() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProjectToken) pulumi.StringOutput { return v.Prefix }).(pulumi.StringOutput)
 }
 
-// ID of the project this token belongs to.
-func (o ProjectTokenOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v *ProjectToken) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
+// ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
+func (o ProjectTokenOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProjectToken) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
 }
 
 // Whether the token has read-only scope. Defaults to false (read-write).

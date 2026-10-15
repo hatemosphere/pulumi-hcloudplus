@@ -11,7 +11,6 @@ import com.pulumi.hcloudplus.ProjectTokenArgs;
 import com.pulumi.hcloudplus.Utilities;
 import com.pulumi.hcloudplus.inputs.ProjectTokenState;
 import java.lang.Boolean;
-import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -108,17 +107,17 @@ public class ProjectToken extends com.pulumi.resources.CustomResource {
         return this.prefix;
     }
     /**
-     * ID of the project this token belongs to.
+     * ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    @Export(name="projectId", refs={Integer.class}, tree="[0]")
-    private Output<Integer> projectId;
+    @Export(name="projectId", refs={String.class}, tree="[0]")
+    private Output<String> projectId;
 
     /**
-     * @return ID of the project this token belongs to.
+     * @return ID of the project this token belongs to, as a string (e.g. `hcloudplus_project.x.id`).
      * 
      */
-    public Output<Integer> projectId() {
+    public Output<String> projectId() {
         return this.projectId;
     }
     /**

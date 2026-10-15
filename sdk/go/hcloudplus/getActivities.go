@@ -70,8 +70,8 @@ type GetActivitiesArgs struct {
 	IncludeUserActivities *bool `pulumi:"includeUserActivities"`
 	// Page size (default 25, max 500).
 	PerPage *int `pulumi:"perPage"`
-	// Filter to specific project IDs.
-	ProjectIds []int `pulumi:"projectIds"`
+	// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
+	ProjectIds []string `pulumi:"projectIds"`
 	// Filter by activity type (e.g. 'server.create', 'token.create').
 	Types []string `pulumi:"types"`
 }
@@ -89,8 +89,8 @@ type GetActivitiesResult struct {
 	IncludeUserActivities *bool `pulumi:"includeUserActivities"`
 	// Page size (default 25, max 500).
 	PerPage *int `pulumi:"perPage"`
-	// Filter to specific project IDs.
-	ProjectIds []int `pulumi:"projectIds"`
+	// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
+	ProjectIds []string `pulumi:"projectIds"`
 	// Filter by activity type (e.g. 'server.create', 'token.create').
 	Types []string `pulumi:"types"`
 }
@@ -110,8 +110,8 @@ type GetActivitiesOutputArgs struct {
 	IncludeUserActivities pulumi.BoolPtrInput `pulumi:"includeUserActivities"`
 	// Page size (default 25, max 500).
 	PerPage pulumi.IntPtrInput `pulumi:"perPage"`
-	// Filter to specific project IDs.
-	ProjectIds pulumi.IntArrayInput `pulumi:"projectIds"`
+	// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
+	ProjectIds pulumi.StringArrayInput `pulumi:"projectIds"`
 	// Filter by activity type (e.g. 'server.create', 'token.create').
 	Types pulumi.StringArrayInput `pulumi:"types"`
 }
@@ -164,9 +164,9 @@ func (o GetActivitiesResultOutput) PerPage() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetActivitiesResult) *int { return v.PerPage }).(pulumi.IntPtrOutput)
 }
 
-// Filter to specific project IDs.
-func (o GetActivitiesResultOutput) ProjectIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v GetActivitiesResult) []int { return v.ProjectIds }).(pulumi.IntArrayOutput)
+// Filter to specific project IDs, as strings (e.g. `hcloudplus_project.x.id`).
+func (o GetActivitiesResultOutput) ProjectIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetActivitiesResult) []string { return v.ProjectIds }).(pulumi.StringArrayOutput)
 }
 
 // Filter by activity type (e.g. 'server.create', 'token.create').
