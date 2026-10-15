@@ -18,20 +18,17 @@ import (
 //go:embed schema.json
 var pulumiSchema []byte
 
-//go:embed bridge-metadata.json
-var bridgeMetadata []byte
-
 func main() {
 	// pf/tfbridge.Main takes a context, the provider name, the bridged
-	// ProviderInfo, and a ProviderMetadata struct carrying both the
-	// Pulumi schema and the auto-generated bridge metadata.
+	// ProviderInfo, and a ProviderMetadata struct carrying the Pulumi
+	// schema. Bridge metadata is embedded via ProviderInfo.MetadataInfo
+	// in resources.go.
 	pftfbridge.Main(
 		context.Background(),
 		"hcloudplus",
 		hcloudplus.Provider(),
 		pftfbridge.ProviderMetadata{
-			PackageSchema:  pulumiSchema,
-			BridgeMetadata: bridgeMetadata,
+			PackageSchema: pulumiSchema,
 		},
 	)
 }

@@ -1,6 +1,6 @@
 module github.com/hatemosphere/pulumi-hcloudplus/provider
 
-go 1.26
+go 1.27
 
 // Pulumi's SDKv2 fork. Version must track pulumi-terraform-bridge/v3's own
 // replace directive — older fork pseudo-versions lack
@@ -9,7 +9,7 @@ go 1.26
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20260318212141-5525259d096b
 
 require (
-	github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20260411201747-3e67cca6ac77
+	github.com/hatemosphere/terraform-provider-hcloudplus v0.0.0-20261015074604-77ed508d6d3a
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.126.0
 )
 
@@ -53,6 +53,8 @@ require (
 	github.com/charmbracelet/x/cellbuf v0.0.15 // indirect
 	github.com/charmbracelet/x/term v0.2.2 // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
+	github.com/chromedp/cdproto v0.158.0 // indirect
+	github.com/chromedp/chromedp v0.21.0 // indirect
 	github.com/clipperhouse/displaywidth v0.11.0 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/cloudflare/circl v1.6.3 // indirect
@@ -72,9 +74,9 @@ require (
 	github.com/go-git/go-billy/v5 v5.8.0 // indirect
 	github.com/go-git/go-git/v5 v5.17.1 // indirect
 	github.com/go-jose/go-jose/v4 v4.1.4 // indirect
+	github.com/go-json-experiment/json v0.0.0-20260820222146-c27c302e5fc3 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/go-rod/rod v0.116.2 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v1.2.5 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
@@ -108,8 +110,8 @@ require (
 	github.com/hashicorp/terraform-registry-address v0.4.0 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect
-	github.com/hatemosphere/hcloud-go-plus v0.0.0-20260411201718-ce7305f2cab4 // indirect
-	github.com/hatemosphere/hcloud-go-plus/authbrowser v0.0.0-20260411201718-ce7305f2cab4 // indirect
+	github.com/hatemosphere/hcloud-go-plus v0.0.0-20261015074409-471967e96442 // indirect
+	github.com/hatemosphere/hcloud-go-plus/authbrowser v0.0.0-20261015074409-471967e96442 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect
@@ -190,11 +192,6 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
-	github.com/ysmood/fetchup v0.2.3 // indirect
-	github.com/ysmood/goob v0.4.0 // indirect
-	github.com/ysmood/got v0.40.0 // indirect
-	github.com/ysmood/gson v0.7.3 // indirect
-	github.com/ysmood/leakless v0.9.0 // indirect
 	github.com/yuin/goldmark v1.7.13 // indirect
 	github.com/zclconf/go-cty v1.17.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
