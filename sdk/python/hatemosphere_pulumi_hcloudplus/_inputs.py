@@ -20,15 +20,15 @@ __all__ = [
 ]
 
 class ProjectOwnerArgsDict(TypedDict):
-    email: NotRequired[pulumi.Input[_builtins.str]]
+    email: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     Primary email address on the owning Hetzner account.
     """
-    id: NotRequired[pulumi.Input[_builtins.int]]
+    id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
     Numeric Hetzner account ID of the project owner.
     """
-    robot_cn: NotRequired[pulumi.Input[_builtins.str]]
+    robot_cn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     Hetzner Robot client number (e.g. K0247406420) of the owning account.
     """
@@ -36,9 +36,9 @@ class ProjectOwnerArgsDict(TypedDict):
 @pulumi.input_type
 class ProjectOwnerArgs:
     def __init__(__self__, *,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 id: Optional[pulumi.Input[_builtins.int]] = None,
-                 robot_cn: Optional[pulumi.Input[_builtins.str]] = None):
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 id: pulumi.Input[Optional[_builtins.int]] = None,
+                 robot_cn: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] email: Primary email address on the owning Hetzner account.
         :param pulumi.Input[_builtins.int] id: Numeric Hetzner account ID of the project owner.
@@ -53,38 +53,38 @@ class ProjectOwnerArgs:
 
     @_builtins.property
     @pulumi.getter
-    def email(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def email(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Primary email address on the owning Hetzner account.
         """
         return pulumi.get(self, "email")
 
     @email.setter
-    def email(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def email(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "email", value)
 
     @_builtins.property
     @pulumi.getter
-    def id(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Numeric Hetzner account ID of the project owner.
         """
         return pulumi.get(self, "id")
 
     @id.setter
-    def id(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def id(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "id", value)
 
     @_builtins.property
     @pulumi.getter(name="robotCn")
-    def robot_cn(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def robot_cn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Hetzner Robot client number (e.g. K0247406420) of the owning account.
         """
         return pulumi.get(self, "robot_cn")
 
     @robot_cn.setter
-    def robot_cn(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def robot_cn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "robot_cn", value)
 
 

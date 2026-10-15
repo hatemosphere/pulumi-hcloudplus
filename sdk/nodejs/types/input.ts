@@ -9,13 +9,13 @@ export interface ProjectOwner {
     /**
      * Primary email address on the owning Hetzner account.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Numeric Hetzner account ID of the project owner.
      */
-    id?: pulumi.Input<number>;
+    id?: pulumi.Input<number | undefined>;
     /**
      * Hetzner Robot client number (e.g. K0247406420) of the owning account.
      */
-    robotCn?: pulumi.Input<string>;
+    robotCn?: pulumi.Input<string | undefined>;
 }

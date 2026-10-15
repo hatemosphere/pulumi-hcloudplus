@@ -187,12 +187,12 @@ def get_activities(created_after: Optional[_builtins.str] = None,
         per_page=pulumi.get(__ret__, 'per_page'),
         project_ids=pulumi.get(__ret__, 'project_ids'),
         types=pulumi.get(__ret__, 'types'))
-def get_activities_output(created_after: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                          created_before: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                          include_user_activities: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
-                          per_page: Optional[pulumi.Input[Optional[_builtins.int]]] = None,
-                          project_ids: Optional[pulumi.Input[Optional[Sequence[_builtins.int]]]] = None,
-                          types: Optional[pulumi.Input[Optional[Sequence[_builtins.str]]]] = None,
+def get_activities_output(created_after: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                          created_before: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                          include_user_activities: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
+                          per_page: pulumi.Input[Optional[Optional[_builtins.int]]] = None,
+                          project_ids: pulumi.Input[Optional[Optional[Sequence[_builtins.int]]]] = None,
+                          types: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetActivitiesResult]:
     """
     Cross-project audit activities. Reads GET /_activities. Time window is capped at 31 days by Hetzner.

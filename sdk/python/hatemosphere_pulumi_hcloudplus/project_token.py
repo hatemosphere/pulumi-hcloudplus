@@ -21,7 +21,7 @@ class ProjectTokenArgs:
     def __init__(__self__, *,
                  description: pulumi.Input[_builtins.str],
                  project_id: pulumi.Input[_builtins.int],
-                 readonly: Optional[pulumi.Input[_builtins.bool]] = None):
+                 readonly: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ProjectToken resource.
 
@@ -60,25 +60,25 @@ class ProjectTokenArgs:
 
     @_builtins.property
     @pulumi.getter
-    def readonly(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def readonly(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether the token has read-only scope. Defaults to false (read-write).
         """
         return pulumi.get(self, "readonly")
 
     @readonly.setter
-    def readonly(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def readonly(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "readonly", value)
 
 
 @pulumi.input_type
 class _ProjectTokenState:
     def __init__(__self__, *,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 prefix: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.int]] = None,
-                 readonly: Optional[pulumi.Input[_builtins.bool]] = None,
-                 secret: Optional[pulumi.Input[_builtins.str]] = None):
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 prefix: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 readonly: pulumi.Input[Optional[_builtins.bool]] = None,
+                 secret: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ProjectToken resources.
 
@@ -101,62 +101,62 @@ class _ProjectTokenState:
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Human-readable description of the token (shown in the Hetzner console).
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter
-    def prefix(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def prefix(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         First-half prefix of the token, used to identify it in audit logs.
         """
         return pulumi.get(self, "prefix")
 
     @prefix.setter
-    def prefix(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def prefix(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "prefix", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def project_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         ID of the project this token belongs to.
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def project_id(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def readonly(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def readonly(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether the token has read-only scope. Defaults to false (read-write).
         """
         return pulumi.get(self, "readonly")
 
     @readonly.setter
-    def readonly(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def readonly(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "readonly", value)
 
     @_builtins.property
     @pulumi.getter
-    def secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def secret(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
         """
         return pulumi.get(self, "secret")
 
     @secret.setter
-    def secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "secret", value)
 
 
@@ -166,9 +166,9 @@ class ProjectToken(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.int]] = None,
-                 readonly: Optional[pulumi.Input[_builtins.bool]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 readonly: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         A project-scoped API token for use against the public Hetzner Cloud API. The <span pulumi-lang-nodejs="`secret`" pulumi-lang-dotnet="`Secret`" pulumi-lang-go="`secret`" pulumi-lang-python="`secret`" pulumi-lang-yaml="`secret`" pulumi-lang-java="`secret`">`secret`</span> output is returned once at creation time; store it in Pulumi/Terraform state (encrypted) and pass it to hcloud-go / terraform-provider-hcloud as needed. Tokens are immutable: any change to <span pulumi-lang-nodejs="`description`" pulumi-lang-dotnet="`Description`" pulumi-lang-go="`description`" pulumi-lang-python="`description`" pulumi-lang-yaml="`description`" pulumi-lang-java="`description`">`description`</span> or <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`">`readonly`</span> forces replacement.
@@ -263,9 +263,9 @@ class ProjectToken(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.int]] = None,
-                 readonly: Optional[pulumi.Input[_builtins.bool]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 readonly: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -296,11 +296,11 @@ class ProjectToken(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            prefix: Optional[pulumi.Input[_builtins.str]] = None,
-            project_id: Optional[pulumi.Input[_builtins.int]] = None,
-            readonly: Optional[pulumi.Input[_builtins.bool]] = None,
-            secret: Optional[pulumi.Input[_builtins.str]] = None) -> 'ProjectToken':
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            prefix: pulumi.Input[Optional[_builtins.str]] = None,
+            project_id: pulumi.Input[Optional[_builtins.int]] = None,
+            readonly: pulumi.Input[Optional[_builtins.bool]] = None,
+            secret: pulumi.Input[Optional[_builtins.str]] = None) -> 'ProjectToken':
         """
         Get an existing ProjectToken resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

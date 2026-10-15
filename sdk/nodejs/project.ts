@@ -111,19 +111,19 @@ export interface ProjectState {
     /**
      * RFC 3339 timestamp of project creation.
      */
-    created?: pulumi.Input<string>;
+    created?: pulumi.Input<string | undefined>;
     /**
      * Human-readable project name. Can be changed in place.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The account that owns the project.
      */
-    owner?: pulumi.Input<inputs.ProjectOwner>;
+    owner?: pulumi.Input<inputs.ProjectOwner | undefined>;
     /**
      * Caller's role in the project (typically 'owner' for projects created via this provider).
      */
-    role?: pulumi.Input<string>;
+    role?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -133,5 +133,5 @@ export interface ProjectArgs {
     /**
      * Human-readable project name. Can be changed in place.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

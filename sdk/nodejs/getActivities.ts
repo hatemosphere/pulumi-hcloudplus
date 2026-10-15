@@ -155,25 +155,25 @@ export interface GetActivitiesOutputArgs {
     /**
      * RFC 3339 lower time bound.
      */
-    createdAfter?: pulumi.Input<string>;
+    createdAfter?: pulumi.Input<string | undefined>;
     /**
      * RFC 3339 upper time bound. Window capped at 31 days.
      */
-    createdBefore?: pulumi.Input<string>;
+    createdBefore?: pulumi.Input<string | undefined>;
     /**
      * Include account-level events (logins, etc). At least one of include*user*activities or<span pulumi-lang-nodejs=" projectIds " pulumi-lang-dotnet=" ProjectIds " pulumi-lang-go=" projectIds " pulumi-lang-python=" project_ids " pulumi-lang-yaml=" projectIds " pulumi-lang-java=" projectIds "> projectIds </span>is required.
      */
-    includeUserActivities?: pulumi.Input<boolean>;
+    includeUserActivities?: pulumi.Input<boolean | undefined>;
     /**
      * Page size (default 25, max 500).
      */
-    perPage?: pulumi.Input<number>;
+    perPage?: pulumi.Input<number | undefined>;
     /**
      * Filter to specific project IDs.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Filter by activity type (e.g. 'server.create', 'token.create').
      */
-    types?: pulumi.Input<pulumi.Input<string>[]>;
+    types?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

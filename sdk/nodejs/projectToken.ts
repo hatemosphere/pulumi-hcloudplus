@@ -132,23 +132,23 @@ export interface ProjectTokenState {
     /**
      * Human-readable description of the token (shown in the Hetzner console).
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * First-half prefix of the token, used to identify it in audit logs.
      */
-    prefix?: pulumi.Input<string>;
+    prefix?: pulumi.Input<string | undefined>;
     /**
      * ID of the project this token belongs to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Whether the token has read-only scope. Defaults to false (read-write).
      */
-    readonly?: pulumi.Input<boolean>;
+    readonly?: pulumi.Input<boolean | undefined>;
     /**
      * The full 64-character bearer token. Only populated on create — Hetzner does not return it on subsequent reads.
      */
-    secret?: pulumi.Input<string>;
+    secret?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -166,5 +166,5 @@ export interface ProjectTokenArgs {
     /**
      * Whether the token has read-only scope. Defaults to false (read-write).
      */
-    readonly?: pulumi.Input<boolean>;
+    readonly?: pulumi.Input<boolean | undefined>;
 }

@@ -22,7 +22,7 @@ class ProjectInvitationArgs:
                  email: pulumi.Input[_builtins.str],
                  project_id: pulumi.Input[_builtins.int],
                  role: pulumi.Input[_builtins.str],
-                 reinvite_on_expiry: Optional[pulumi.Input[_builtins.bool]] = None):
+                 reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ProjectInvitation resource.
 
@@ -75,27 +75,27 @@ class ProjectInvitationArgs:
 
     @_builtins.property
     @pulumi.getter(name="reinviteOnExpiry")
-    def reinvite_on_expiry(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def reinvite_on_expiry(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
         """
         return pulumi.get(self, "reinvite_on_expiry")
 
     @reinvite_on_expiry.setter
-    def reinvite_on_expiry(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def reinvite_on_expiry(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "reinvite_on_expiry", value)
 
 
 @pulumi.input_type
 class _ProjectInvitationState:
     def __init__(__self__, *,
-                 accepted: Optional[pulumi.Input[_builtins.str]] = None,
-                 created: Optional[pulumi.Input[_builtins.str]] = None,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 expired: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.int]] = None,
-                 reinvite_on_expiry: Optional[pulumi.Input[_builtins.bool]] = None,
-                 role: Optional[pulumi.Input[_builtins.str]] = None):
+                 accepted: pulumi.Input[Optional[_builtins.str]] = None,
+                 created: pulumi.Input[Optional[_builtins.str]] = None,
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 expired: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
+                 role: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ProjectInvitation resources.
 
@@ -124,86 +124,86 @@ class _ProjectInvitationState:
 
     @_builtins.property
     @pulumi.getter
-    def accepted(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def accepted(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         RFC 3339 timestamp when the invitation was accepted, or empty if still pending.
         """
         return pulumi.get(self, "accepted")
 
     @accepted.setter
-    def accepted(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def accepted(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "accepted", value)
 
     @_builtins.property
     @pulumi.getter
-    def created(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         RFC 3339 timestamp when the invitation was sent.
         """
         return pulumi.get(self, "created")
 
     @created.setter
-    def created(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created", value)
 
     @_builtins.property
     @pulumi.getter
-    def email(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def email(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
         """
         return pulumi.get(self, "email")
 
     @email.setter
-    def email(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def email(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "email", value)
 
     @_builtins.property
     @pulumi.getter
-    def expired(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def expired(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
         """
         return pulumi.get(self, "expired")
 
     @expired.setter
-    def expired(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def expired(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "expired", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def project_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         ID of the project to invite the user into.
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def project_id(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
     @pulumi.getter(name="reinviteOnExpiry")
-    def reinvite_on_expiry(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def reinvite_on_expiry(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
         """
         return pulumi.get(self, "reinvite_on_expiry")
 
     @reinvite_on_expiry.setter
-    def reinvite_on_expiry(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def reinvite_on_expiry(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "reinvite_on_expiry", value)
 
     @_builtins.property
     @pulumi.getter
-    def role(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def role(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Role to grant on acceptance. One of: admin, member, restricted.
         """
         return pulumi.get(self, "role")
 
     @role.setter
-    def role(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def role(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "role", value)
 
 
@@ -213,10 +213,10 @@ class ProjectInvitation(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.int]] = None,
-                 reinvite_on_expiry: Optional[pulumi.Input[_builtins.bool]] = None,
-                 role: Optional[pulumi.Input[_builtins.str]] = None,
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
+                 role: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         A pending project membership invitation. Invitations are immutable: changing email or role forces replacement (Hetzner does not expose an update endpoint). Accepted invitations continue to exist as project members, which this resource does not manage.
@@ -306,10 +306,10 @@ class ProjectInvitation(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.int]] = None,
-                 reinvite_on_expiry: Optional[pulumi.Input[_builtins.bool]] = None,
-                 role: Optional[pulumi.Input[_builtins.str]] = None,
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
+                 role: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -342,13 +342,13 @@ class ProjectInvitation(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            accepted: Optional[pulumi.Input[_builtins.str]] = None,
-            created: Optional[pulumi.Input[_builtins.str]] = None,
-            email: Optional[pulumi.Input[_builtins.str]] = None,
-            expired: Optional[pulumi.Input[_builtins.str]] = None,
-            project_id: Optional[pulumi.Input[_builtins.int]] = None,
-            reinvite_on_expiry: Optional[pulumi.Input[_builtins.bool]] = None,
-            role: Optional[pulumi.Input[_builtins.str]] = None) -> 'ProjectInvitation':
+            accepted: pulumi.Input[Optional[_builtins.str]] = None,
+            created: pulumi.Input[Optional[_builtins.str]] = None,
+            email: pulumi.Input[Optional[_builtins.str]] = None,
+            expired: pulumi.Input[Optional[_builtins.str]] = None,
+            project_id: pulumi.Input[Optional[_builtins.int]] = None,
+            reinvite_on_expiry: pulumi.Input[Optional[_builtins.bool]] = None,
+            role: pulumi.Input[Optional[_builtins.str]] = None) -> 'ProjectInvitation':
         """
         Get an existing ProjectInvitation resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

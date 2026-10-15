@@ -96,12 +96,8 @@ type GetActivitiesResult struct {
 }
 
 func GetActivitiesOutput(ctx *pulumi.Context, args GetActivitiesOutputArgs, opts ...pulumi.InvokeOption) GetActivitiesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetActivitiesResultOutput, error) {
-			args := v.(GetActivitiesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("hcloudplus:index/getActivities:getActivities", args, GetActivitiesResultOutput{}, options).(GetActivitiesResultOutput), nil
-		}).(GetActivitiesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("hcloudplus:index/getActivities:getActivities", args, GetActivitiesResultOutput{}, options).(GetActivitiesResultOutput)
 }
 
 // A collection of arguments for invoking getActivities.

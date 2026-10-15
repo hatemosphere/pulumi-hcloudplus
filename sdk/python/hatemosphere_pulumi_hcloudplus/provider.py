@@ -19,11 +19,11 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 password: Optional[pulumi.Input[_builtins.str]] = None,
-                 totp_cmd: Optional[pulumi.Input[_builtins.str]] = None,
-                 user_token: Optional[pulumi.Input[_builtins.str]] = None,
-                 username: Optional[pulumi.Input[_builtins.str]] = None):
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 password: pulumi.Input[Optional[_builtins.str]] = None,
+                 totp_cmd: pulumi.Input[Optional[_builtins.str]] = None,
+                 user_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 username: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Provider resource.
 
@@ -46,62 +46,62 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Override the API base URL. Defaults to https://api.hetzner.cloud/v1. Useful for recording/replay or tests.
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
     @pulumi.getter
-    def password(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def password(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Hetzner Cloud Console password. Required when<span pulumi-lang-nodejs=" userToken " pulumi-lang-dotnet=" UserToken " pulumi-lang-go=" userToken " pulumi-lang-python=" user_token " pulumi-lang-yaml=" userToken " pulumi-lang-java=" userToken "> userToken </span>is not set. Can also be set via HCLOUDPLUS_PASSWORD.
         """
         return pulumi.get(self, "password")
 
     @password.setter
-    def password(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def password(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "password", value)
 
     @_builtins.property
     @pulumi.getter(name="totpCmd")
-    def totp_cmd(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def totp_cmd(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Shell command whose stdout (trimmed) is the current 6-digit TOTP code. Example: "op read 'op://vault/accounts.hetzner.com/one-time password?attribute=totp'". Required when<span pulumi-lang-nodejs=" userToken " pulumi-lang-dotnet=" UserToken " pulumi-lang-go=" userToken " pulumi-lang-python=" user_token " pulumi-lang-yaml=" userToken " pulumi-lang-java=" userToken "> userToken </span>is not set. Can also be set via HCLOUDPLUS_TOTP_CMD.
         """
         return pulumi.get(self, "totp_cmd")
 
     @totp_cmd.setter
-    def totp_cmd(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def totp_cmd(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "totp_cmd", value)
 
     @_builtins.property
     @pulumi.getter(name="userToken")
-    def user_token(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def user_token(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Account-level user token extracted from a logged-in Hetzner Cloud Console session. Mutually exclusive with username/password/totp_cmd. Can also be set via the HCLOUDPLUS_USER_TOKEN environment variable.
         """
         return pulumi.get(self, "user_token")
 
     @user_token.setter
-    def user_token(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def user_token(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "user_token", value)
 
     @_builtins.property
     @pulumi.getter
-    def username(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def username(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Hetzner Cloud Console username (robot login / client number or account email). Required when<span pulumi-lang-nodejs=" userToken " pulumi-lang-dotnet=" UserToken " pulumi-lang-go=" userToken " pulumi-lang-python=" user_token " pulumi-lang-yaml=" userToken " pulumi-lang-java=" userToken "> userToken </span>is not set. Can also be set via HCLOUDPLUS_USERNAME.
         """
         return pulumi.get(self, "username")
 
     @username.setter
-    def username(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def username(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "username", value)
 
 
@@ -111,11 +111,11 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 password: Optional[pulumi.Input[_builtins.str]] = None,
-                 totp_cmd: Optional[pulumi.Input[_builtins.str]] = None,
-                 user_token: Optional[pulumi.Input[_builtins.str]] = None,
-                 username: Optional[pulumi.Input[_builtins.str]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 password: pulumi.Input[Optional[_builtins.str]] = None,
+                 totp_cmd: pulumi.Input[Optional[_builtins.str]] = None,
+                 user_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 username: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         The provider type for the hcloudplus package. By default, resources use package-wide configuration
@@ -160,11 +160,11 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 password: Optional[pulumi.Input[_builtins.str]] = None,
-                 totp_cmd: Optional[pulumi.Input[_builtins.str]] = None,
-                 user_token: Optional[pulumi.Input[_builtins.str]] = None,
-                 username: Optional[pulumi.Input[_builtins.str]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 password: pulumi.Input[Optional[_builtins.str]] = None,
+                 totp_cmd: pulumi.Input[Optional[_builtins.str]] = None,
+                 user_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 username: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
