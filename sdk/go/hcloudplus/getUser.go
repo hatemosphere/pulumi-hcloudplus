@@ -63,10 +63,8 @@ type GetUserResult struct {
 }
 
 func GetUserOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetUserResultOutput {
-	return pulumi.ToOutput(0).ApplyT(func(int) (GetUserResultOutput, error) {
-		options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-		return ctx.InvokeOutput("hcloudplus:index/getUser:getUser", nil, GetUserResultOutput{}, options).(GetUserResultOutput), nil
-	}).(GetUserResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("hcloudplus:index/getUser:getUser", nil, GetUserResultOutput{}, options).(GetUserResultOutput)
 }
 
 // A collection of values returned by getUser.

@@ -86,23 +86,23 @@ export interface ProviderArgs {
     /**
      * Override the API base URL. Defaults to https://api.hetzner.cloud/v1. Useful for recording/replay or tests.
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * Hetzner Cloud Console password. Required when<span pulumi-lang-nodejs=" userToken " pulumi-lang-dotnet=" UserToken " pulumi-lang-go=" userToken " pulumi-lang-python=" user_token " pulumi-lang-yaml=" userToken " pulumi-lang-java=" userToken "> userToken </span>is not set. Can also be set via HCLOUDPLUS_PASSWORD.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Shell command whose stdout (trimmed) is the current 6-digit TOTP code. Example: "op read 'op://vault/accounts.hetzner.com/one-time password?attribute=totp'". Required when<span pulumi-lang-nodejs=" userToken " pulumi-lang-dotnet=" UserToken " pulumi-lang-go=" userToken " pulumi-lang-python=" user_token " pulumi-lang-yaml=" userToken " pulumi-lang-java=" userToken "> userToken </span>is not set. Can also be set via HCLOUDPLUS_TOTP_CMD.
      */
-    totpCmd?: pulumi.Input<string>;
+    totpCmd?: pulumi.Input<string | undefined>;
     /**
      * Account-level user token extracted from a logged-in Hetzner Cloud Console session. Mutually exclusive with username/password/totp_cmd. Can also be set via the HCLOUDPLUS_USER_TOKEN environment variable.
      */
-    userToken?: pulumi.Input<string>;
+    userToken?: pulumi.Input<string | undefined>;
     /**
      * Hetzner Cloud Console username (robot login / client number or account email). Required when<span pulumi-lang-nodejs=" userToken " pulumi-lang-dotnet=" UserToken " pulumi-lang-go=" userToken " pulumi-lang-python=" user_token " pulumi-lang-yaml=" userToken " pulumi-lang-java=" userToken "> userToken </span>is not set. Can also be set via HCLOUDPLUS_USERNAME.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {

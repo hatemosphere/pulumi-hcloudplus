@@ -61,10 +61,8 @@ type GetLimitsResult struct {
 }
 
 func GetLimitsOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetLimitsResultOutput {
-	return pulumi.ToOutput(0).ApplyT(func(int) (GetLimitsResultOutput, error) {
-		options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-		return ctx.InvokeOutput("hcloudplus:index/getLimits:getLimits", nil, GetLimitsResultOutput{}, options).(GetLimitsResultOutput), nil
-	}).(GetLimitsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("hcloudplus:index/getLimits:getLimits", nil, GetLimitsResultOutput{}, options).(GetLimitsResultOutput)
 }
 
 // A collection of values returned by getLimits.

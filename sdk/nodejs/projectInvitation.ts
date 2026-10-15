@@ -142,31 +142,31 @@ export interface ProjectInvitationState {
     /**
      * RFC 3339 timestamp when the invitation was accepted, or empty if still pending.
      */
-    accepted?: pulumi.Input<string>;
+    accepted?: pulumi.Input<string | undefined>;
     /**
      * RFC 3339 timestamp when the invitation was sent.
      */
-    created?: pulumi.Input<string>;
+    created?: pulumi.Input<string | undefined>;
     /**
      * Email address of the invitee. Hetzner accepts any syntactically valid email; it does not validate deliverability.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * RFC 3339 timestamp when the invitation expired (Hetzner times invitations out after some period), or empty if still valid. A non-empty value on refresh means the invite can no longer be accepted by the recipient. Combine with `pulumi up -replace` or the <span pulumi-lang-nodejs="`reinviteOnExpiry`" pulumi-lang-dotnet="`ReinviteOnExpiry`" pulumi-lang-go="`reinviteOnExpiry`" pulumi-lang-python="`reinvite_on_expiry`" pulumi-lang-yaml="`reinviteOnExpiry`" pulumi-lang-java="`reinviteOnExpiry`">`reinviteOnExpiry`</span> attribute to mint a fresh invitation.
      */
-    expired?: pulumi.Input<string>;
+    expired?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to invite the user into.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
      */
-    reinviteOnExpiry?: pulumi.Input<boolean>;
+    reinviteOnExpiry?: pulumi.Input<boolean | undefined>;
     /**
      * Role to grant on acceptance. One of: admin, member, restricted.
      */
-    role?: pulumi.Input<string>;
+    role?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -184,7 +184,7 @@ export interface ProjectInvitationArgs {
     /**
      * If true, Read will check whether the invitation has expired; if so, the resource is marked for replacement on the next plan (a fresh invitation is created and the stale one is revoked). Defaults to false. This is the only way to get automatic re-invitation without a manual `-replace`.
      */
-    reinviteOnExpiry?: pulumi.Input<boolean>;
+    reinviteOnExpiry?: pulumi.Input<boolean | undefined>;
     /**
      * Role to grant on acceptance. One of: admin, member, restricted.
      */
